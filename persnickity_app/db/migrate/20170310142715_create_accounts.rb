@@ -3,8 +3,7 @@ class CreateAccounts < ActiveRecord::Migration[5.0]
     create_table :accounts do |t|
       t.string :user_name
       t.string :password_digest
-      t.varchar{320} :email
-
+      t.varchar :email, limit: 320
       t.timestamps
     end
   end
