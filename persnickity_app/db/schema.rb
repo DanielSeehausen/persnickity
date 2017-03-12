@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 20170312013548) do
     t.string  "grade",           limit: 10
     t.string  "cuisine"
     t.bigint  "zip_code"
-    t.integer "score"
     t.string  "phone"
     t.string  "address"
     t.integer "neighborhood_id"
@@ -45,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170312013548) do
     t.string  "code"
     t.string  "description"
     t.string  "critial_flag"
+    t.integer "score"
     t.string  "inspection_type"
     t.string  "inspection_date"
     t.integer "restaurant_id"

@@ -12,20 +12,22 @@ namespace :update_db do
       grade = result["grade"]
       cuisine = result["cuisine_description"]
       zip_code = result["zipcode"].to_i
-      score = result["score"].to_i
       phone = result["phone"]
-      address = result["building"] + " " + result["street"] 
+      address = result["building"] + " " + result["street"]
 
-      restaurant = Restaurant.find_or_create_by(name: name, grade: grade, cuisine: cuisine, zip_code: zip_code,
-      score: score, phone: phone, address: address)
+      restaurant = Restaurant.find_or_create_by(name: name, cuisine: cuisine, zip_code: zip_code,
+      phone: phone, address: address)
+      restaurant.grade = grade 
+
       code = result["violation_code"]
       description = result["violation_description"]
       critial_flag = result["critical_flag"]
       inspection_type = result["inspection_type"]
       inspection_date = result["inspection_date"]
+      score = result["score"].to_i
 
       Violation.find_or_create_by(code: code, description: description, critial_flag: critial_flag,
-      inspection_type: inspection_type, inspection_date: inspection_date)
+      inspection_type: inspection_type, inspection_date: inspection_date, score: score)
     end
 
   end

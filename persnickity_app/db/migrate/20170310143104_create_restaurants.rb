@@ -5,7 +5,6 @@ class CreateRestaurants < ActiveRecord::Migration[5.0]
       t.string :grade, limit: 10
       t.string :cuisine
       t.integer :zip_code, limit: 5
-      t.integer :score
       t.string :phone
       t.string :address
       t.integer :neighborhood_id
