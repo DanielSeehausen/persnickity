@@ -3,6 +3,7 @@ class CreateRestaurants < ActiveRecord::Migration[5.0]
     create_table :restaurants do |t|
       t.string :name
       t.string :grade, limit: 10
+      t.string :cuisine
       t.integer :zip_code, limit: 5
       t.integer :score
       t.string :phone

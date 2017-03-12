@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20170312013548) do
   create_table "restaurants", force: :cascade do |t|
     t.string  "name"
     t.string  "grade",           limit: 10
+    t.string  "cuisine"
     t.bigint  "zip_code"
     t.integer "score"
     t.string  "phone"
