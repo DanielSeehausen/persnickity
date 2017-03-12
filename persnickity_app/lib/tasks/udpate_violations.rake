@@ -9,7 +9,6 @@ namespace :update_db do
 
     results.each do |result|
       name = result["dba"]
-      grade = result["grade"]
       cuisine = result["cuisine_description"]
       zip_code = result["zipcode"].to_i
       phone = result["phone"]
@@ -17,7 +16,10 @@ namespace :update_db do
 
       restaurant = Restaurant.find_or_create_by(name: name, cuisine: cuisine, zip_code: zip_code,
       phone: phone, address: address)
-      restaurant.grade = grade 
+      if result["grade"]
+        restaurant.grade = result["grade"]
+        restaurant.save
+      end
 
       code = result["violation_code"]
       description = result["violation_description"]
