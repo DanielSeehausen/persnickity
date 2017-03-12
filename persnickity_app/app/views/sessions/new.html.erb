@@ -1,0 +1,11 @@
+WELCOME STUFF ON TOP
+
+<%= form_for @account, url: '/' do |f| %>
+  <%= f.label :user_name %>
+  <%= f.text_field :user_name %>
+  <%= f.label :password %>
+  <%= f.password_field :password %><br>
+  <%= f.submit 'Login'%>
+<% end %>
+
+<%= link_to 'Create Account', new_account_path %>
