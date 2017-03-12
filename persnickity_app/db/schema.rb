@@ -32,12 +32,10 @@ ActiveRecord::Schema.define(version: 20170310155001) do
 
   create_table "restaurants", force: :cascade do |t|
     t.string   "name"
-    t.string   "grade",           limit: 10
+    t.string   "grade",      limit: 10
     t.bigint   "zip"
-    t.integer  "neighborhood_id"
-    t.string   "cuisine"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
 end
