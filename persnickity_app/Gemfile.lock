@@ -39,9 +39,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
-    bcrypt (3.1.11)
     autoprefixer-rails (6.7.6)
       execjs
+    bcrypt (3.1.11)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     builder (3.2.3)
@@ -159,8 +159,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bcrypt
   autoprefixer-rails
+  bcrypt
   bootstrap-sass (~> 3.2.0)
   byebug
   coffee-rails (~> 4.2)
