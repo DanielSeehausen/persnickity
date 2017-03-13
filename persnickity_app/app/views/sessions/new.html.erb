@@ -1,11 +1,26 @@
-WELCOME STUFF ON TOP
+<%= form_for @account, url: '/login' do |f| %>
+    <div class="container" style="padding-left:28%; padding-top:60px; padding-bottom:30px">
+        <div class="form-group">
+          <%= f.label :user_name, "Username", class:"col-xs-2 control-label" %>
+          <div class="col-xs-4">
+            <%= f.text_field :user_name, class:"form-control" %>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="form-group">
+          <%= f.label :password, "Password", class:"col-xs-2 control-label" %>
+          <div class="col-xs-4">
+            <%= f.password_field :password, class:"form-control" %>
+          </div>
+        </div>
 
-<%= form_for @account, url: '/' do |f| %>
-  <%= f.label :user_name %>
-  <%= f.text_field :user_name %>
-  <%= f.label :password %>
-  <%= f.password_field :password %><br>
-  <%= f.submit 'Login'%>
+        <div class="form-group">
+          <div class="col-xs-offset-2 col-xs-10">
+            <%= f.submit "Login", class:"button" %>
+            <input type="button" value="Cancel" class="button"/>
+          </div>
+        </div>
+    </div>
+
 <% end %>
-
-<%= link_to 'Create Account', new_account_path %>
