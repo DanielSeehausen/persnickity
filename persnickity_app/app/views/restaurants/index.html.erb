@@ -1,5 +1,18 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Restaurants with Best Scores</h1>
+<ol>
+  <%@best_five.each do |one|%>
+    <li><%=one.name.capitalize%></li>
+  <%end%>
+</ol>
+
+<h1>Restaurants with Worst Scores</h1>
+<ol>
+  <%@worst_five.each do |one|%>
+    <li><%=one.name.capitalize%></li>
+  <%end%>
+</ol>
 <h1>Restaurants</h1>
 
 <table>
@@ -25,13 +38,7 @@
         <td><%= restaurant.phone %></td>
         <td><%= restaurant.address %></td>
         <td><%= link_to 'Show', restaurant %></td>
-        <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
-        <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Restaurant', new_restaurant_path %>
