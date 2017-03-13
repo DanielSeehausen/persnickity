@@ -9,7 +9,7 @@
       </ul>
     </div>
   <% end %>
-  <div class="container" style="padding-left:28%; padding-top:60px; padding-bottom:30px">
+  <div class="container" style="padding-left:28%; padding-top:60px">
     <div class="form-group">
       <%= f.label :user_name, "Username", class:"col-xs-2 control-label" %>
       <div class="col-xs-4">
@@ -40,9 +40,11 @@
     <%= f.text_field :zip_code, class:"form-control" %>
     </div>
   </div>
+  <br>
+  <br>
   <div class="form-group">
     <div class="col-xs-offset-2 col-xs-10">
-      <%= f.submit "Create Account", class:"button"%>
+      <%= f.submit class:"button"%>
     </div>
   </div>
 </div>

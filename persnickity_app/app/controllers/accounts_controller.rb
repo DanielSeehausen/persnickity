@@ -42,8 +42,6 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit CAN ONLY EDIT OWN ACCOUNT
   def edit
-    binding.pry
-    byebug
     if @account.id != logged_in_account
       redirect_to login_path
     end

@@ -1,5 +1,13 @@
-<h1>Editing Account</h1>
+<div class="container-fluid text-center">
+  <h1>Editing Account</h1>
+</div>
 
 <%= render 'form', account: @account %>
-<%= link_to 'Show', @account %> |
-<%= link_to 'Back', accounts_path %>
+
+<div class="container" style="padding-left:28%">
+  <div class="form-group">
+    <div class="col-xs-offset-2 col-xs-10">
+      <%= link_to 'Back', account_path(@account), class:"button" %>
+    </div>
+  </div>
+</div>

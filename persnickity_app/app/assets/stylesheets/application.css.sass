@@ -19,24 +19,41 @@
 @import "bootstrap"
 
 
-container
-  padding: 80px 120px
-
-// .navbar
-//   background-color: #999
-//   color: white
-//   padding: 20px
+// .container
+//   margin-top: 30px
+//   padding: 80px 120px
+//
+// .container-fluid
 //   margin-top: 30px
 
+.navbar
+  border: 0
+  border-radius: 0
+  margin-bottom: 0
+  font-size: 18px
+  background-color: #555
+
+.navbar-default .navbar-brand
+  color: white
+
+.navbar-default .navbar-nav li a
+  color: white
+
+.navbar a:hover
+  color: #1abc9c !important
 
 .footer
-  background-color: #999
+  background-color: #555
   color: white
-  padding: 20px
-  margin-top: 30px
+  padding-bottom: 10px
+  padding-top: 10px
+  margin-top: 200px
+
+.footer a:hover
+  color: #1abc9c !important
 
 .button
-  background-color: #999
+  background-color: #555
   border: none
   color: white
   padding: 10px 25px
@@ -46,3 +63,6 @@ container
   font-size: 16px
   margin: 4px 2px
   cursor: pointer
+
+.button :hover
+  color: #1abc9c !important
