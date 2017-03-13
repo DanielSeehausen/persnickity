@@ -1,19 +1,17 @@
 
-<class
 <nav class="navbar navbar-default" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/"> /<span class="glyphicon glyphicon-glass" aria-hidden="true", style="font-size: 18px" ></span>/ Slanted Walls</a>
+      <a class="navbar-brand" href="/"> /<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>/ Slanted Walls</a>
     </div>
-      <ul class="nav navbar-nav navbar-right", style="font-size: 18px">
-          <li role="presentation"><a href="/">Home</a></li>
-          <% if session[:account_id] %>
-            <li role="presentation"><%= link_to 'Logout', logout_path, :method => :delete%></a></li>
-          <% else %>
-            <li role="presentation"><a href="/login">Login</a></li> <!--possibly remove login and signup options once session is active -->
-            <li role="presentation"><a href="/accounts/new">Sign Up</a></li>
-          <% end %>
-        </ul>
-      </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if session[:account_id] %>
+        <li role="presentation"><a href="/accounts/<%= session[:account_id] %>">Home</a></li>
+        <li role="presentation"><%= link_to 'Logout', logout_path, :method => :delete%></a></li>
+      <% else %>
+        <li role="presentation"><a href="/login">Login</a></li>
+        <li role="presentation"><a href="/accounts/new">Sign Up</a></li>
+      <% end %>
+    </ul>
   </div>
 </nav>

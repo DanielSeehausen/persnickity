@@ -1,18 +1,29 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User name:</strong>
-  <%= @account.user_name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @account.email %>
-</p>
-
-<% if @logged_in_account == @account.id %>
-  <%= link_to 'Edit', edit_account_path(@account) %>
-  <%= link_to 'Destroy', @account, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <%= link_to 'Back', accounts_path %>
-  <%= link_to 'Logout', login_path, method: :delete %>
-<% end %>
+<div class="container-fluid text-center" style="padding-top:30px">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <% if @logged_in_account == @account.id %>
+        <p><h3>Hey <%= @account.user_name %>!</h3></p>
+        <br>
+        <p><%= link_to 'Edit Account', edit_account_path(@account) %></p>
+        <p><%= link_to 'Delete Account', @account, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      <% end %>
+    </div>
+    <div class="col-sm-8 text-left">
+      <p id="notice"><%= notice %></p>
+      <h1>Welcome</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <hr>
+      <h3>Test</h3>
+      <p>Lorem ipsum...</p>
+    </div>
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+    </div>
+  </div>
+</div>
