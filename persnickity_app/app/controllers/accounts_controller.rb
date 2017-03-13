@@ -10,6 +10,10 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
+    @a_avg = @account.neighborhood.get_relative_dominance_of_grade('A')
+    @b_avg = @account.neighborhood.get_relative_dominance_of_grade('B')
+    @c_avg = @account.neighborhood.get_relative_dominance_of_grade('C')
+
     @logged_in_account = logged_in_account
   end
 

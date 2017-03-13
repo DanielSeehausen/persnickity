@@ -3,11 +3,10 @@ class CreateViolations < ActiveRecord::Migration[5.0]
     create_table :violations do |t|
       t.string :code
       t.string :description
-      t.string :critial_flag
-      t.integer :score
-      t.string :inspection_type
+      #TODO this should be date/time and the rake task should be changed accordingly to get it into postgres format
       t.string :inspection_date
-      t.integer :restaurant_id
+      t.integer :score
+      t.boolean :critical_flag
     end
   end
 end
