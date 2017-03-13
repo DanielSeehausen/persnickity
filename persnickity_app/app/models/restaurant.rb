@@ -1,3 +1,3 @@
 class Restaurant < ApplicationRecord
-  has_many :violations
+  has_many :restaurant_violations
 end
