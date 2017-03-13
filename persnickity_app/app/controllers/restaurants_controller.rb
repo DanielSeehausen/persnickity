@@ -5,11 +5,14 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
+    @best_five = Restaurant.best_five_health_score
+    @worst_five = Restaurant.worst_five_health_score
   end
 
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show
+
   end
 
 
