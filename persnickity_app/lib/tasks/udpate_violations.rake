@@ -4,7 +4,7 @@ namespace :update_db do
     require 'open-uri'
     require 'json'
 
-    url = open("https://data.cityofnewyork.us/resource/xx67-kt59.json").read
+    url = open("https://data.cityofnewyork.us/resource/xx67-kt59.json?$order=inspection_date%20desc").read
     results = JSON.parse(url)
 
     results.each do |result|
