@@ -10,7 +10,18 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
-    @logged_in_account = logged_in_account
+    if logged_in_account
+      if logged_in_account==set_account.id
+        @logged_in_account = logged_in_account
+      else
+        @logged_in_account = logged_in_account
+        flash[:error] = "Why you messing with people's stuff?"
+        redirect_to "accounts/#{@logged_in_account}"
+      end
+    else
+      flash[:error] = "You must be logged in"
+      redirect_to login_path
+    end
   end
 
   # GET /accounts/new NOT ACCESSIBLE WHEN LOGGED IN
@@ -84,7 +95,11 @@ class AccountsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_account
-    @account = Account.find(params[:id])
+    if !Account.find_by(id: params[:id])
+      redirect_to homepage_path #redirec to 404 when available
+    else
+      @account = Account.find_by(id: params[:id])
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
