@@ -2,7 +2,6 @@
   <% if account.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
-
       <ul>
       <% account.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,23 +9,41 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :user_name %>
-    <%= f.text_field :user_name %>
+  <div class="container" style="padding-left:28%; padding-top:60px; padding-bottom:30px">
+    <div class="form-group">
+      <%= f.label :user_name, "Username", class:"col-xs-2 control-label" %>
+      <div class="col-xs-4">
+      <%= f.text_field :user_name, class:"form-control"%>
+      </div>
+    </div>
+  <br>
+  <br>
+  <div class="form-group">
+    <%= f.label :password, class:"col-xs-2 control-label" %>
+    <div class="col-xs-4">
+    <%= f.password_field :password, class:"form-control" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+  <br>
+  <br>
+  <div class="form-group">
+    <%= f.label :email, class:"col-xs-2 control-label" %>
+    <div class="col-xs-4">
+    <%= f.text_field :email, class:"form-control" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+  <br>
+  <br>
+  <div class="form-group">
+    <%= f.label :zip_code, class:"col-xs-2 control-label"  %>
+    <div class="col-xs-4">
+    <%= f.text_field :zip_code, class:"form-control" %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class="col-xs-offset-2 col-xs-10">
+      <%= f.submit "Create Account", class:"button"%>
+    </div>
   </div>
+</div>
 <% end %>

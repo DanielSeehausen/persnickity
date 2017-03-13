@@ -24,6 +24,8 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit CAN ONLY EDIT OWN ACCOUNT
   def edit
+    binding.pry
+    byebug
     if @account.id != logged_in_account
       redirect_to login_path
     end
@@ -32,16 +34,20 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(account_params)
-
-    respond_to do |format|
-      if @account.save
-        session[:account_id] = @account.id
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render :show, status: :created, location: @account }
-      else
-        format.html { render :new }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
+    if !Restaurant.find_by(zip_code: account_params["zip_code"])
+      flash[:error] = "That's a dirty Zip yo"
+      redirect_to new_account_path
+    else
+      @account = Account.new(account_params)
+      respond_to do |format|
+        if @account.save
+          session[:account_id] = @account.id
+          format.html { redirect_to @account, notice: 'Account was successfully created.' }
+          format.json { render :show, status: :created, location: @account }
+        else
+          format.html { render :new }
+          format.json { render json: @account.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -76,14 +82,14 @@ class AccountsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_account
-      @account = Account.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_account
+    @account = Account.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def account_params
-      params.require(:account).permit(:user_name, :password, :email)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def account_params
+    params.require(:account).permit(:user_name, :password, :email, :zip_code)
+  end
 
 end

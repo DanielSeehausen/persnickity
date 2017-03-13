@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    byebug
     @account = Account.find_by(user_name: account_params[:user_name])
     if @account
       if @account.authenticate(account_params[:password])
