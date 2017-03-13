@@ -6,14 +6,13 @@
 </p>
 
 <p>
-  <strong>Password digest:</strong>
-  <%= @account.password_digest %>
-</p>
-
-<p>
   <strong>Email:</strong>
   <%= @account.email %>
 </p>
 
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+<% if @logged_in_account == @account.id %>
+  <%= link_to 'Edit', edit_account_path(@account) %>
+  <%= link_to 'Destroy', @account, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Back', accounts_path %>
+  <%= link_to 'Logout', login_path, method: :delete %>
+<% end %>
