@@ -1,5 +1,18 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Restaurants with Best Scores</h1>
+<ol>
+  <%@best_five.each do |one|%>
+    <li><%=one.name.capitalize%></li>
+  <%end%>
+</ol>
+
+<h1>Restaurants with Worst Scores</h1>
+<ol>
+  <%@worst_five.each do |one|%>
+    <li><%=one.name.capitalize%></li>
+  <%end%>
+</ol>
 <h1>Restaurants</h1>
 
 <table>
