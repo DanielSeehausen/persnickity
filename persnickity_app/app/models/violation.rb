@@ -1,4 +1,3 @@
 class Violation < ApplicationRecord
-  belongs_to :restaurant
-
+  has_many :restaurant_violations
 end

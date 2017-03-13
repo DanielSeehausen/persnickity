@@ -4,7 +4,7 @@ namespace :update_db do
     require 'open-uri'
     require 'json'
 
-    url = open("https://data.cityofnewyork.us/resource/xx67-kt59.json").read
+    url = open("https://data.cityofnewyork.us/resource/xx67-kt59.json?$order=inspection_date%20desc").read
     results = JSON.parse(url)
 
     results.each do |result|
@@ -24,12 +24,16 @@ namespace :update_db do
       code = result["violation_code"]
       description = result["violation_description"]
       critial_flag = result["critical_flag"]
+
+      violation = Violation.find_or_create_by(code: code, description: description, critial_flag: critial_flag)
+
+
       inspection_type = result["inspection_type"]
       inspection_date = result["inspection_date"]
       score = result["score"].to_i
 
-      Violation.find_or_create_by(code: code, description: description, critial_flag: critial_flag,
-      inspection_type: inspection_type, inspection_date: inspection_date, score: score)
+      restaurant_violation = RestaurantViolation.find_or_create_by(inspection_type: inspection_type,
+      inspection_date: inspection_date, score: score, restaurant: restaurant, violation: violation)
     end
 
   end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  inspection_type: MyString
+  inspection_type: MyString
+  score: 1
+
+two:
+  inspection_type: MyString
+  inspection_type: MyString
+  score: 1
