@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :restaurants
   resources :accounts
   get '/' => 'static#new', as: 'homepage'
-  get '/aboutus' => 'static#aboutus', as: 'aboutus'
+  get '/login' => 'static#login' #has to be changed to sessions once we merge
+  get '/about' => 'static#about', as: 'about'
+  get '/contact' => 'static#contact', as: 'contact'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
