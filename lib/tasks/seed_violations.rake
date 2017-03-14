@@ -26,10 +26,10 @@ namespace :update_db do
     require 'open-uri'
     require 'json'
 
-    url = open("https://data.cityofnewyork.us/resource/xx67-kt59.json?$limit=10000").read
+    url = open("https://data.cityofnewyork.us/resource/xx67-kt59.json?$limit=49000").read
 
     results = JSON.parse(url)
-
+    counter = 0
     results.each do |result|
       #assignments pertaining to the restaurant
       camis    = result.key?("camis") ? result["camis"] : nil
@@ -60,6 +60,8 @@ namespace :update_db do
 
       Restaurant.where(camis: camis).first_or_create({ camis: camis, name: name, grade: grade, zip_code: zip_code, phone: phone, address: address, cuisine: cuisine})
       Violation.where(code: code).first_or_create({ code: code, description: description, critical_flag: critical_flag, inspection_date: inspection_date, score: score })
+      counter += 1
+      puts counter
     end
 
   end
