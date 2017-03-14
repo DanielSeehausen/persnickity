@@ -60,7 +60,7 @@ namespace :update_db do
       Restaurant.where(camis: camis).first_or_create({ camis: camis, grade: grade, zip_code: zip_code, phone: phone, address: address, cuisine: cuisine, name: name })
       Violation.where(code: code).first_or_create({ code: code, description: description, critical_flag: critical_flag, inspection_date: inspection_date, score: score })
       counter += 1
-      puts counter
+      print "\r #{counter}"
     end
 
   end

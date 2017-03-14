@@ -1,12 +1,14 @@
 class Restaurant < ApplicationRecord
   has_many :restaurant_violations
   has_many :violations, through: :restaurant_violations
+  has_one :neighborhood
   validates :zip_code, presence: true
-  after_create :assign_neighborhood_id_from_zip
 
-  def assign_neighborhood_id_from_zip
-
-  end
+  # after_create :assign_neighborhood_id_from_zip
+  #
+  # def assign_neighborhood_id_from_zip
+  #
+  # end
 
   def self.ACTIVE_GRADES
     ['A', 'B', 'C']
