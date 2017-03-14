@@ -1,3 +1,6 @@
+#PLEASE NOTE: THIS IS FOR POPULATING AN EMPTY DATABASE. IF THIS IS TO BE RUN OVER EXISTING DATA, ADDITIONAL JOIN TABLE ENTRIES WILL BE MADE (RESTAURANT VIOLATIONS)
+#TODO if needed, alter and save as update task as well
+
 # example of hash information
 #{
 #  "cuisine_description" : "American",
@@ -32,13 +35,14 @@ namespace :update_db do
     counter = 0
     results.each do |result|
       #assignments pertaining to the restaurant
-      camis    = result.key?("camis") ? result["camis"] : nil
-      name     = result.key?("dba") ? result["dba"] : nil
-      grade    = result.key?("grade") ? result["grade"] : nil
-      cuisine  = result.key?("cuisine_description") ? result["cuisine_description"] : nil
       next if !result.key?("zipcode") #if zip_code does not exist move on to the next record
-      zip_code = result["zipcode"].to_i
-      phone    = result.key?("phone") ? result["phone"] : nil
+      zip_code  = result["zipcode"].to_i
+      camis     = result.key?("camis") ? result["camis"] : nil
+      name      = result.key?("dba") ? result["dba"] : nil
+      grade     = result.key?("grade") ? result["grade"] : nil
+      cuisine   = result.key?("cuisine_description") ? result["cuisine_description"] : nil
+      phone     = result.key?("phone") ? result["phone"] : nil
+
       if (result.key?("building") && result.key?("street"))
         address = result["building"] + " " + result["street"]
       elsif result.key?("street")
@@ -53,13 +57,15 @@ namespace :update_db do
       else
         critical_flag = nil
       end
-      inspection_date = result.key?("inspection_date") ? result["inspection_date"] : nil
-      #TODO decide how we want to use this together
+
+      #assignments pertaining to the RestaurantViolation instance
+      inspection_date = result.key?("inspection_date") ? result["inspection_date"].split("T", 1)[0] : nil
       score           = result.key?("score") ? result["score"].to_i : nil #this is the restaurant's score during that whole inspection (not from the violation alone).
 
+      r = Restaurant.where(camis: camis).first_or_create({ camis: camis, name: name, grade: grade, zip_code: zip_code, phone: phone, address: address, cuisine: cuisine})
+      v = Violation.where(code: code).first_or_create({ code: code, description: description, critical_flag: critical_flag})
+      RestaurantViolation.create({ restaurant_id: r.id, violation_id: v.id, inspection_date: inspection_date, score: score })
 
-      Restaurant.where(camis: camis).first_or_create({ camis: camis, name: name, grade: grade, zip_code: zip_code, phone: phone, address: address, cuisine: cuisine})
-      Violation.where(code: code).first_or_create({ code: code, description: description, critical_flag: critical_flag, inspection_date: inspection_date, score: score })
       counter += 1
       print "\r #{counter}"
     end
