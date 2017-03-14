@@ -1,13 +1,13 @@
 <%= form_for @account, url: '/login' do |f| %>
     <div class="container" style="padding-left:28%; padding-top:60px; padding-bottom:30px">
+
         <div class="form-group">
           <%= f.label :user_name, "Username", class:"col-xs-2 control-label" %>
           <div class="col-xs-4">
             <%= f.text_field :user_name, class:"form-control" %>
           </div>
-        </div>
-        <br>
-        <br>
+        </div><br><br>
+
         <div class="form-group">
           <%= f.label :password, "Password", class:"col-xs-2 control-label" %>
           <div class="col-xs-4">
@@ -21,6 +21,6 @@
             <input type="button" value="Cancel" class="button"/>
           </div>
         </div>
-    </div>
 
+    </div>
 <% end %>

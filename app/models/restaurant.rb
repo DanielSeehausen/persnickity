@@ -1,12 +1,14 @@
 class Restaurant < ApplicationRecord
   has_many :restaurant_violations
   has_many :violations, through: :restaurant_violations
+  has_one :neighborhood
   validates :zip_code, presence: true
-  after_create :assign_neighborhood_id_from_zip
 
-  def assign_neighborhood_id_from_zip
-
-  end
+  # after_create :assign_neighborhood_id_from_zip
+  #
+  # def assign_neighborhood_id_from_zip
+  #
+  # end
 
   def self.ACTIVE_GRADES
     ['A', 'B', 'C']
@@ -14,6 +16,7 @@ class Restaurant < ApplicationRecord
 
   def unhealth_score
     self.restaurant_violations.inject(0){|sum, x| sum += x.score}
+    #TODO fix the violations call
   end
 
   def self.best_five_health_score

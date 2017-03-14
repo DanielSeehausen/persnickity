@@ -1,7 +1,5 @@
 class Neighborhood < ApplicationRecord
   has_many :restaurants
-  validates :zip_code, presence: true
-
 
   def get_most_common_cuisine
     cuisine_hash = Hash.new
