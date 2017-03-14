@@ -51,10 +51,13 @@ namespace :update_db do
       Neighborhood.create(name: n)
     end
 
+    counter = 0
     Restaurant.all.each do |r|
+      counter += 1
+      print "\r #{counter}"
       neighborhood_zips.each do |n, zips|
         if zips.include?(r.zip_code)
-          r.neighborhood_id = Neighborhood.find_by zip_code: r.zip_code
+          r.neighborhood_id = Neighborhood.find_by name: n
           r.save
           next
         end
