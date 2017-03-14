@@ -26,10 +26,10 @@ namespace :update_db do
     require 'open-uri'
     require 'json'
 
-    url = open("https://data.cityofnewyork.us/resource/xx67-kt59.json?$limit=10000").read
+    url = open("https://data.cityofnewyork.us/resource/xx67-kt59.json?$limit=49000").read
 
     results = JSON.parse(url)
-
+    counter = 0
     results.each do |result|
       #assignments pertaining to the restaurant
       camis    = result.key?("camis") ? result["camis"] : nil
@@ -57,8 +57,10 @@ namespace :update_db do
       #TODO decide how we want to use this together
       score           = result.key?("score") ? result["score"].to_i : nil #this is the restaurant's score during that whole inspection (not from the violation alone).
 
-      Restaurant.where(camis: camis).first_or_create({ camis: camis, grade: grade, zip_code: zip_code, phone: phone, address: address, cuisine: cuisine })
+      Restaurant.where(camis: camis).first_or_create({ camis: camis, grade: grade, zip_code: zip_code, phone: phone, address: address, cuisine: cuisine, name: name })
       Violation.where(code: code).first_or_create({ code: code, description: description, critical_flag: critical_flag, inspection_date: inspection_date, score: score })
+      counter += 1
+      puts counter
     end
 
   end

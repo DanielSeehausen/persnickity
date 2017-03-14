@@ -16,6 +16,9 @@ class AccountsController < ApplicationController
     # @b_avg = @account.neighborhood.get_relative_dominance_of_grade('B')
     # @c_avg = @account.neighborhood.get_relative_dominance_of_grade('C')
 
+    @worst_five = Restaurant.where(zip_code: @account.zip_code).worst_five_health_score
+    @best_five = Restaurant.where(zip_code: @account.zip_code).best_five_health_score
+
     @logged_in_account = logged_in_account
     if logged_in_account
       if logged_in_account==set_account.id
