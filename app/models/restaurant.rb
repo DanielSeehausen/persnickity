@@ -16,6 +16,7 @@ class Restaurant < ApplicationRecord
 
   def unhealth_score
     self.restaurant_violations.inject(0){|sum, x| sum += x.score}
+    #TODO fix the violations call
   end
 
   def self.best_five_health_score
