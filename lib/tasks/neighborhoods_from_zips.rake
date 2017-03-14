@@ -1,5 +1,5 @@
 namespace :update_db do
-  desc "pull information from JSON file and update DB"
+  desc "assign neighborhoods to restaurants via their zip code"
   task :neighborhoods_from_zips => :environment do
 
     neighborhood_zips = {
@@ -60,10 +60,13 @@ namespace :update_db do
       Neighborhood.create(name: n)
     end
 
+    #this could be made a lot quicker by using zip's as keys (as they are what is being looked up)
+    counter = 0
     Restaurant.all.each do |r|
+      counter += 1
       neighborhood_zips.each do |n, zips|
         if zips.include?(r.zip_code)
-          r.neighborhood_id = Neighborhood.find_by zip_code: r.zip_code
+          r.neighborhood_id = (Neighborhood.find_by name: n).id
           r.save
           next
         end

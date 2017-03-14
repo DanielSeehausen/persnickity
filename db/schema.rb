@@ -35,9 +35,8 @@ ActiveRecord::Schema.define(version: 20170313155853) do
   create_table "restaurant_violations", force: :cascade do |t|
     t.integer  "restaurant_id"
     t.integer  "violation_id"
-    t.boolean  "critical_flag"
+    t.date     "inspection_date"
     t.integer  "score"
-    t.string   "inspection_date"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
@@ -57,8 +56,6 @@ ActiveRecord::Schema.define(version: 20170313155853) do
   create_table "violations", force: :cascade do |t|
     t.string  "code"
     t.string  "description"
-    t.string  "inspection_date"
-    t.integer "score"
     t.boolean "critical_flag"
   end
 
