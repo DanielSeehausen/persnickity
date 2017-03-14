@@ -11,16 +11,14 @@ class AccountsController < ApplicationController
   # GET /accounts/1.json
   def show
     #this is for the frontend, put where needed
-    # @a_avg = @account.neighborhood.get_relative_dominance_of_grade('A')
-    # @b_avg = @account.neighborhood.get_relative_dominance_of_grade('B')
-    # @c_avg = @account.neighborhood.get_relative_dominance_of_grade('C')
-
-    @worst_five = Restaurant.where(zip_code: @account.zip_code).worst_five_health_score
-    @best_five = Restaurant.where(zip_code: @account.zip_code).best_five_health_score
+    @hood = Neighborhood.find_by(id: Restaurant.where(zip_code: @account.zip_code).first.neighborhood_id)
+    a_avg = @hood.get_relative_dominance_of_grade('A')
+    b_avg = @hood.get_relative_dominance_of_grade('B')
+    c_avg = @hood.get_relative_dominance_of_grade('C')
+    @rel_grades = [{'A': a_avg}, {'B': b_avg}, {'C': c_avg}]
 
     @logged_in_account = logged_in_account
 
-    
     if logged_in_account
       if logged_in_account==set_account.id
         @logged_in_account = logged_in_account

@@ -11,8 +11,6 @@ class NeighborhoodsController < ApplicationController
   # GET /neighborhoods/1.json
   def show
 
-    @most_common_cuisine = @neighborhood.get_most_common_cuisine
-    @ranking_percentiles = @neighborhood.get_ranking_percentiles
     #return [Most common cuisine, %A, B, C, P's relative to avg.]
   end
 
