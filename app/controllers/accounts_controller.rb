@@ -10,17 +10,15 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
-
     #this is for the frontend, put where needed
     # @a_avg = @account.neighborhood.get_relative_dominance_of_grade('A')
     # @b_avg = @account.neighborhood.get_relative_dominance_of_grade('B')
     # @c_avg = @account.neighborhood.get_relative_dominance_of_grade('C')
-
-    @logged_in_account = logged_in_account
     if logged_in_account
       if logged_in_account==set_account.id
         @logged_in_account = logged_in_account
       else
+        byebug
         @logged_in_account = logged_in_account
         flash[:error] = "Why you messing with people's stuff?"
         redirect_to "accounts/#{@logged_in_account}"
@@ -101,7 +99,7 @@ class AccountsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_account
     if !Account.find_by(id: params[:id])
-      redirect_to homepage_path #redirec to 404 when available
+      redirect_to homepage_path #TODO redirect to 404 when available
     else
       @account = Account.find_by(id: params[:id])
     end
