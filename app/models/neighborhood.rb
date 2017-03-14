@@ -42,4 +42,18 @@ class Neighborhood < ApplicationRecord
             :dominance    => dominance}
   end
 
+  def get_bottom_five
+    #returns bottom 5 PERFORMING (highest scores) restaurants
+    self.restaurants.all.order("score DESC").first(5)
+  end
+
+  def get_top_five
+    #returns top 5 PERFORMING (lowest scores) restaurants
+    self.restaurants.all.order("score ASC").first(5)
+  end
+
+  def self.get_worst_all_NYC
+    Restaurant.all.order("score DESC").where.not(score: nil).first
+  end
+
 end
