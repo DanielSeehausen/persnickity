@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
       redirect_to @account
     else
       @account = Account.new
-      binding.pry
     end
   end
 

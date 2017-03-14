@@ -52,8 +52,12 @@ namespace :update_db do
     end
 
     Restaurant.all.each do |r|
-      neighborhood_zips.each do |nz|
-        if r.zip_code
+      neighborhood_zips.each do |n, zips|
+        if zips.include?(r.zip_code)
+          r.neighborhood_id = Neighborhood.find_by zip_code: r.zip_code
+          r.save
+          next
+        end
       end
     end
 
