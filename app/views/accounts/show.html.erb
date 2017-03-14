@@ -12,10 +12,46 @@
     <div class="col-sm-8 text-left">
       <p id="notice"><%= notice %></p>
       <h1>Welcome</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <h4>Worst Repeat Offenders in Yo Hood <i><small>regardless of current grade</small></i></h4>
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th class="col-xs-4">Name</th>
+            <th class="col-xs-2" style="text-align:center">Grade</th>
+            <th class="col-xs-3">Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @worst_five.each do |rest| %>
+            <tr>
+              <td><%= rest[:name].titleize %></td>
+              <td style="text-align:center"><%= rest[:grade] %></td>
+              <td><%= rest[:address].gsub(" Ave","th Ave").titleize %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <h4>And Now the Best Five...</h4>
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+          </tr>
+        </thead>
+        <tbody>
+          <% @best_five.each do |rest| %>
+            <tr>
+              <td class="col-xs-4"><%= rest[:name].titleize %></td>
+              <td class="col-xs-2" style="text-align:center"><%= rest[:grade] %></td>
+              <td class="col-xs-3"><%= rest[:address].titleize %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
       <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
+      <h3>Neighborhood Grade Stats</h3>
+      <p>Park Slope has 2.5x as many A's as the New York average</p>
+      <p>Park Slope has 1x as many B's as the New York average</p>
+      <p>Park Slope has .5x as many C's as the New York average</p>
     </div>
     <div class="col-sm-2 sidenav">
       <div class="well">
