@@ -2,12 +2,8 @@ class CreateRestaurants < ActiveRecord::Migration[5.0]
   def change
     create_table :restaurants do |t|
       t.string :name
-<<<<<<< HEAD
-      t.string :grade, limit: 10
-=======
       t.string :grade
-      t.integer :score #total score, which determines grade when it falls in a range
->>>>>>> 5a1b4103ebf7643197f8f8908d316ab074a3e786
+      t.integer :score #this will be most recent score (run rake task "assign_current_restaurant_scores" to populate)
       t.string :cuisine
       t.integer :zip_code, limit: 5
       t.string :phone
