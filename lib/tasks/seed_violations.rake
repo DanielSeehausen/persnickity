@@ -57,6 +57,7 @@ namespace :update_db do
       #TODO decide how we want to use this together
       score           = result.key?("score") ? result["score"].to_i : nil #this is the restaurant's score during that whole inspection (not from the violation alone).
 
+
       Restaurant.where(camis: camis).first_or_create({ camis: camis, name: name, grade: grade, zip_code: zip_code, phone: phone, address: address, cuisine: cuisine})
       Violation.where(code: code).first_or_create({ code: code, description: description, critical_flag: critical_flag, inspection_date: inspection_date, score: score })
     end
