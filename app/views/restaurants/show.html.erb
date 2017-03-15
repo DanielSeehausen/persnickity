@@ -5,8 +5,8 @@
       <div class="btn-group">
         <%= link_to 'My Account', account_path(session[:account_id]), class:"button" %>
         <%= link_to 'All Restuarants', restaurants_path, class:"button" %>
-        <%= link_to 'Previous Restaurants', restaurant_path(@restaurant.id-1), class:"button" %>
-        <%= link_to 'Next Restaurants', restaurant_path(@restaurant.id+1), class:"button" %>
+        <%= link_to 'Previous Restaurants', restaurant_path(@restaurant.previous_id), class:"button"%>
+        <%= link_to 'Next Restaurants', restaurant_path(@restaurant.next_id), class:"button" %>
         <%= link_to 'Neighborhoods', neighborhoods_path, class:"button" %>
       </div>
     </div>
@@ -32,7 +32,7 @@
   </div>
 
   <br>
-  <p style="text-align:left">  <%= image_tag "my-icons-collection/png/#{@badicons[0]}" %>
+  <p><%= image_tag "my-icons-collection/png/#{@badicons[0]}" %>
       <strong>For Critical Violation</strong>
       <%= image_tag "my-icons-collection/goodicons/#{@goodicons[17]}" %>
       <strong>For Non-Critical Violation</strong>

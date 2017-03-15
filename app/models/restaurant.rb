@@ -15,4 +15,13 @@ class Restaurant < ApplicationRecord
     ['A', 'B', 'C']
   end
 
+  def next_id
+    return 1 if self.id == Restaurant.all.count
+    self.id + 1
+  end
+
+  def previous_id
+    return Restaurant.all.count if self.id == 1
+    self.id - 1
+  end
 end
