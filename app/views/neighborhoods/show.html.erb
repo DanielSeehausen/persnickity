@@ -1,12 +1,28 @@
-<p id="notice"><%= notice %></p>
+<%= render 'shared/jumbo' %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @neighborhood.name %>
-</p>
+<div class="container-fluid text-center" style="padding-top:30px">
+  <div class="row content">
 
-<p>
-  <strong>Dominant cuisine:</strong>
-</p>
+    <div class="col-sm-2 sidenav">
+      <h2>Neighborhood Browser</h2>
+      <br>
+      <div class="btn-group">
+        <%= link_to 'All Hoods', neighborhoods_path, class:"button" %>
+        <%= link_to 'Previous Hood', neighborhood_path(@neighborhood.id-1), class:"button" %>
+        <%= link_to 'Next Hood', neighborhood_path(@neighborhood.id+1), class:"button" %>
+      </div>
+    </div>
 
-<%= link_to 'Back', neighborhoods_path %>
+    <%= render 'shared/hood' %>
+
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -5,4 +5,11 @@ class ApplicationController < ActionController::Base
     session[:account_id]
   end
 
+  def get_relative_grades
+    a_avg = @hood.get_relative_dominance_of_grade('A')
+    b_avg = @hood.get_relative_dominance_of_grade('B')
+    c_avg = @hood.get_relative_dominance_of_grade('C')
+    @rel_grades = [{'A': a_avg}, {'B': b_avg}, {'C': c_avg}]
+  end
+
 end
