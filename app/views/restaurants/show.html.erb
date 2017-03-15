@@ -1,33 +1,38 @@
 <p id="notice"><%= notice %></p>
+<div class="container-fluid text-center" style="padding-top:30px">
+  <div id = "Restaurant info">
+    <h4>Name: <%= @restaurant.name %> </h4>
+    <p><strong>Grade:</strong><%= @restaurant.grade %>
+    <p><strong>Zip:</strong><%= @restaurant.zip_code %></p>
+    <p><strong>Cuisine:</strong><%= @restaurant.cuisine %></p>
+    <p><strong>Phone:</strong><%= @restaurant.phone %></p>
+    <p> <strong>Address:</strong> <%= @restaurant.address %></p>
+  </div>
+  <br>
 
-<p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
 
-<p>
-  <strong>Grade:</strong>
-  <%= @restaurant.grade %>
 
-<p>
-  <strong>Zip:</strong>
-  <%= @restaurant.zip_code %>
-</p>
 
-<p>
-  <strong>Cuisine:</strong>
-  <%= @restaurant.cuisine %>
-</p>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th class="col-xs-1">Inspection Date</th>
+        <th class="col-xs-1" style="text-align:center">Violation Code</th>
+        <th class="col-xs-3">Violation Description</th>
+      </tr>
+    </thead>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @restaurant.phone %>
-</p>
+      <%@restaurant.restaurant_violations.each do |rv|%>
+        <tbody>
+          <th><%=rv.inspection_date%></th>
+          <th><%=rv.violation.code%></th>
+          <th><%=rv.violation.description%></th>
+        </tbody>
+      <%end%>
 
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
+  </table>
 
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', restaurants_path %>
+  <%= link_to 'Back', restaurants_path %>
+
+
+</div>

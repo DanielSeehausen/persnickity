@@ -85,11 +85,7 @@ class AccountsController < ApplicationController
 
   private
   def set_account
-    if !Account.find_by(id: params[:id])
-      redirect_to homepage_path #TODO redirect to 404 when available
-    else
-      @account = Account.find_by(id: params[:id])
-    end
+    @account = Account.find_by(id: params[:id]) or not_found
   end
 
   def account_params

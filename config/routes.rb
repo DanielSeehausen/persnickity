@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   get '/about' => 'static#about', as: 'about'
   get '/contact' => 'static#contact', as: 'contact'
   delete '/' => 'sessions#destroy', as: 'logout'
+
+  #wildcard catch for anything and everything that has fallen through
+  get "*a", :to => 'application#not_found'
+
 end

@@ -6,7 +6,7 @@ class NeighborhoodsController < ApplicationController
 
   def show
     if params[:id] == '0'
-      redirect_to '/neighborhoods/park-slope' #TODO redirect to 404
+      not_found
     else
       if is_number?(params[:id])
         @neighborhood = Neighborhood.find(params[:id])
@@ -20,7 +20,7 @@ class NeighborhoodsController < ApplicationController
 
   private
     def set_neighborhood
-      @neighborhood = Neighborhood.find_by_slug(params[:id])
+      @neighborhood = Neighborhood.find_by_slug(params[:id]) or not_found
     end
 
     def neighborhood_params
