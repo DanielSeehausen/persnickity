@@ -3,9 +3,9 @@
   <div class="row restaurant_content">
     <div class="col-sm-2 sidenav_placeholder">
     </div>
-    <div class="col-sm-8 mainpage">
+    <div class="col-sm-10 mainpage">
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-4">
           <div class="text-left" id = "Restaurant info">
             <h2> <%= @restaurant.name %> </h2>
             <p><strong>Grade:</strong><%= @restaurant.grade %>
@@ -16,7 +16,10 @@
             <p> <strong>Address:</strong> <%= @restaurant.address %></p>
           </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
+            <%=line_chart @restaurant.restaurant_violations.group(:inspection_date).count%>
+        </div>
+        <div class="col-sm-3">
             <%=line_chart @restaurant.restaurant_violations.group(:inspection_date).count%>
         </div>
       </div>
