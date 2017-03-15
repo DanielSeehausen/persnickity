@@ -11,7 +11,7 @@ class AccountsController < ApplicationController
     @best_five = @neighborhood.get_top_five
     @badicons = Dir.entries("app/assets/images/my-icons-collection/png").select {|f| !File.directory? f}
     @goodicons = Dir.entries("app/assets/images/my-icons-collection/goodicons").select {|f| !File.directory? f}
-    get_relative_grades
+    @rel_grades = @neighborhood.get_relative_grades
     @logged_in_account = logged_in_account
     if logged_in_account
       if logged_in_account==set_account.id

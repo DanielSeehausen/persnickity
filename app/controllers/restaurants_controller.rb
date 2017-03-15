@@ -10,7 +10,8 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-
+    @violations = @restaurant.restaurant_violations.sort_by{|v| v.inspection_date}.reverse
+    #@violations_array = [@restaurant.restaurant_violations, ,RestaurantViolation.all]
   end
 
 

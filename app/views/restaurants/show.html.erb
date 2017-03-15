@@ -1,17 +1,32 @@
 <p id="notice"><%= notice %></p>
 <div class="container-fluid text-center" style="padding-top:30px">
-  <div id = "Restaurant info">
-    <h4>Name: <%= @restaurant.name %> </h4>
-    <p><strong>Grade:</strong><%= @restaurant.grade %>
-    <p><strong>Zip:</strong><%= @restaurant.zip_code %></p>
-    <p><strong>Cuisine:</strong><%= @restaurant.cuisine %></p>
-    <p><strong>Phone:</strong><%= @restaurant.phone %></p>
-    <p> <strong>Address:</strong> <%= @restaurant.address %></p>
+  <div class="row restaurant_content">
+    <div class="col-sm-2 sidenav_placeholder">
+    </div>
+    <div class="col-sm-10 mainpage">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="text-left" id = "Restaurant info">
+            <h2> <%= @restaurant.name %> </h2>
+            <p><strong>Grade:</strong><%= @restaurant.grade %>
+            <p><strong>Score:</strong><%= @restaurant.score %>
+            <p><strong>Neighborhood:</strong><%= link_to @restaurant.neighborhood.name, neighborhood_path(@restaurant.neighborhood) %></p>
+            <p><strong>Cuisine:</strong><%= @restaurant.cuisine %></p>
+            <p><strong>Phone:</strong><%= @restaurant.phone %></p>
+            <p> <strong>Address:</strong> <%= @restaurant.address %></p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+            <%=line_chart @restaurant.restaurant_violations.group(:inspection_date).count%>
+        </div>
+        <div class="col-sm-3">
+            <%=line_chart @restaurant.restaurant_violations.group(:inspection_date).count%>
+        </div>
+      </div>
+    </div>
   </div>
+
   <br>
-
-
-
 
   <table class="table table-hover table-bordered">
     <thead>
@@ -22,7 +37,7 @@
       </tr>
     </thead>
 
-      <%@restaurant.restaurant_violations.each do |rv|%>
+      <%@violations.each do |rv|%>
         <tbody>
           <th><%=rv.inspection_date%></th>
           <th><%=rv.violation.code%></th>

@@ -1,7 +1,7 @@
 class Restaurant < ApplicationRecord
   has_many :restaurant_violations
   has_many :violations, through: :restaurant_violations
-  has_one :neighborhood
+  belongs_to :neighborhood
   validates :zip_code, presence: true
 
   #TODO
