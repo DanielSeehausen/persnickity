@@ -1,58 +1,20 @@
+<%= render 'shared/jumbo' %>
 
 <div class="container-fluid text-center" style="padding-top:30px">
   <div class="row content">
+
     <div class="col-sm-2 sidenav">
-      <% if @logged_in_account == @account.id %>
-        <p><h3>Hey <%= @account.user_name %>!</h3></p>
-        <br>
-        <p><%= link_to 'Edit Account', edit_account_path(@account) %></p>
-        <p><%= link_to 'Delete Account', @account, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-      <% end %>
+      <h2>Hey <%= @account.user_name %>!</h2>
+      <br>
+      <div class="btn-group">
+        <%= link_to 'Edit Account', edit_account_path(@account), class:"button" %>
+        <%= link_to 'Delete Account', @account, method: :delete, data: { confirm: 'Are you sure?' }, class:"button" %>
+        <%= link_to 'Browse Neighborhoods', neighborhoods_path, class:"button" %>
+      </div>
     </div>
-    <div class="col-sm-8 text-left">
-      <p id="notice"><%= notice %></p>
-      <h1>Welcome</h1>
-      <h4>Worst Repeat Offenders in Yo Hood <i><small>regardless of current grade</small></i></h4>
-      <table class="table table-hover table-bordered">
-        <thead>
-          <tr>
-            <th class="col-xs-4">Name</th>
-            <th class="col-xs-2" style="text-align:center">Grade</th>
-            <th class="col-xs-3">Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @worst_five.each do |rest| %>
-            <tr>
-              <td><%= rest[:name].titleize %></td>
-              <td style="text-align:center"><%= rest[:grade] %></td>
-              <td><%= rest[:address].gsub(" Ave","th Ave").titleize %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <h4>And Now the Best Five...</h4>
-      <table class="table table-hover table-bordered">
-        <thead>
-          <tr>
-          </tr>
-        </thead>
-        <tbody>
-          <% @best_five.each do |rest| %>
-            <tr>
-              <td class="col-xs-4"><%= rest[:name].titleize %></td>
-              <td class="col-xs-2" style="text-align:center"><%= rest[:grade] %></td>
-              <td class="col-xs-3"><%= rest[:address].titleize %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <hr>
-      <h3>Neighborhood Grade Stats</h3>
-      <p>Park Slope has 2.5x as many A's as the New York average</p>
-      <p>Park Slope has 1x as many B's as the New York average</p>
-      <p>Park Slope has .5x as many C's as the New York average</p>
-    </div>
+
+    <%= render 'shared/hood' %>
+
     <div class="col-sm-2 sidenav">
       <div class="well">
         <p>ADS</p>
@@ -61,5 +23,6 @@
         <p>ADS</p>
       </div>
     </div>
+
   </div>
 </div>

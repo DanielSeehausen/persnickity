@@ -56,4 +56,18 @@ class Neighborhood < ApplicationRecord
     Restaurant.all.order("score DESC").where.not(score: nil).first
   end
 
+  def slug
+    self.name.gsub(" ","-").downcase
+  end
+
+  def self.find_by_slug(slug)
+    Neighborhood.all.find do |hood|
+      hood.slug == slug
+    end
+  end
+
+  def to_param
+    slug
+  end
+
 end

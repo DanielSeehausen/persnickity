@@ -3,7 +3,6 @@ namespace :update_db do
   task :neighborhoods_from_zips => :environment do
 
     neighborhood_zips = {
-      # Bronx
       'Central Bronx'                 =>	[10453, 10457, 10460],
       'Bronx Park and Fordham'        =>  [10458, 10467, 10468],
       'High Bridge and Morrisania'	  =>  [10451, 10452, 10456],
@@ -11,7 +10,7 @@ namespace :update_db do
       'Kingsbridge and Riverdale'     =>	[10463, 10471],
       'Northeast Bronx'               =>  [10466, 10469, 10470, 10475],
       'Southeast Bronx'               =>	[10461, 10462,10464, 10465, 10472, 10473],
-      #Brooklyn
+
       'Central Brooklyn'              =>	[11212, 11213, 11216, 11233, 11238],
       'Southwest Brooklyn'            =>  [11209, 11214, 11228],
       'Borough Park'                  =>  [11204, 11218, 11219, 11230],
@@ -27,7 +26,7 @@ namespace :update_db do
       'Greenpoint'                    =>	[11211, 11222],
       'Sunset Park'                   =>	[11220, 11232],
       'Bushwick and Williamsburg'	    =>  [11206, 11221, 11237],
-      #Manhattan
+
       'Central Harlem'	              =>  [10026, 10027, 10030, 10037, 10039],
       'Chelsea and Clinton'           =>  [10001, 10011, 10018, 10019, 10020, 10036],
       'East Harlem'                   =>	[10029, 10035],
@@ -38,7 +37,7 @@ namespace :update_db do
       'Upper East Side'               =>	[10021, 10028, 10044, 10065, 10075, 10128],
       'Upper West Side'               =>	[10023, 10024, 10025],
       'Inwood and Washington Heights' =>	[10031, 10032, 10033, 10034, 10040],
-      #Queens
+
       'Northeast Queens'              =>  [11361, 11362, 11363, 11364],
       'North Queens'                  =>  [11354, 11355, 11356, 11357, 11358, 11359, 11360],
       'Central Queens'                =>  [11365, 11366, 11367],
@@ -49,7 +48,7 @@ namespace :update_db do
       'Southeast Queens'              =>  [11004, 11005, 11411, 11413, 11422, 11426, 11427, 11428, 11429],
       'Southwest Queens'              =>  [11414, 11415, 11416, 11417, 11418, 11419, 11420, 11421],
       'West Queens'                   =>  [11368, 11369, 11370, 11372, 11373, 11377, 11378],
-      #Staten Island (who cares?)
+
       'Port Richmond'                 =>	[10302, 10303, 10310],
       'South Shore'                   =>  [10306, 10307, 10308, 10309, 10312],
       'Stapleton and St. George'      =>  [10301, 10304, 10305],
@@ -60,9 +59,12 @@ namespace :update_db do
       Neighborhood.create(name: n)
     end
 
+    #TODO associate account with neighborhood via zip
+    
     #this could be made a lot quicker by using zip's as keys (as they are what is being looked up)
     counter = 0
     Restaurant.all.each do |r|
+      counter += 1
       neighborhood_zips.each do |n, zips|
         if zips.include?(r.zip_code)
           r.neighborhood_id = (Neighborhood.find_by name: n).id
@@ -70,8 +72,6 @@ namespace :update_db do
           next
         end
       end
-      counter += 1
-      print "\r #{counter}"
     end
 
   end
