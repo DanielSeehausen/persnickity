@@ -70,4 +70,13 @@ class Neighborhood < ApplicationRecord
     slug
   end
 
+  def neighborhood_violations
+    violation_array = []
+    self.restaurants.each do |r|
+      r.restaurant_violations.each do |v|
+        violation_array << v
+      end
+    end
+    violation_array
+  end
 end
