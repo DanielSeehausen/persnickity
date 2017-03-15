@@ -1,44 +1,79 @@
-<p id="notice"><%= notice %></p>
+<div id="restaurant_carousel" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="item active">
+      <div class="carousel-inner" style="height:160px">
+        <%= image_tag 'sandwhich.jpg' %>
+       <div class="carousel-caption" style="top:7%">
+         <h1>NYC Restaurant Ratings</h1>
+         <h3><%=@phrases.sample%></h3>
+       </div>
+     </div>
+    </div>
+  </div>
+</div>
 
-<h1>Restaurants with Best Scores</h1>
-<ol>
-  <%@best_five.each do |one|%>
-    <li><%=one.name.capitalize%></li>
-  <%end%>
-</ol>
+<div class="container-fluid text-center" style="padding-top:30px">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <p><h3>Pick Your Poison </h3></p>
+      <p><%= image_tag "my-icons-collection/png/#{@badicons.sample}" %></p>
+      <p><%= link_to 'My Account', account_path(session[:account_id]) %></p>
+      <p><%= link_to 'Neighborhoods', neighborhoods_path %></p>
+    </div>
+    <div class="col-sm-8 text-left">
+      <h2>NYC Worst Offenders</h2>
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th class="col-xs-3">Name</th>
+            <th class="col-xs-1" style="text-align:center">Grade</th>
+            <th class="col-xs-1" style="text-align:center">Score</th>
+            <th class="col-xs-1">Cuisine</th>
+            <th class="col-xs-3">Neighborhood</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @worst_five.each do |rest| %>
+            <tr>
+              <td> <%= image_tag "my-icons-collection/png/#{@badicons.sample}" %>  <%= link_to "#{rest.name.titleize}",rest %> </td>
+              <td style="text-align:center"><%= rest.grade %></td>
+              <td style="text-align:center"><%= rest.score %></td>
+              <td><%= rest.cuisine.titleize %></td>
+              <td><%= link_to "#{Neighborhood.find(rest.neighborhood_id).name.titleize}", neighborhood_path(rest.neighborhood_id)%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<h1>Restaurants with Worst Scores</h1>
-<ol>
-  <%@worst_five.each do |one|%>
-    <li><%=one.name.capitalize%></li>
-  <%end%>
-</ol>
-<h1>Restaurants</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Grade</th>
-      <th>Zip Code</th>
-      <th>Cuisine</th>
-      <th>Phone</th>
-      <th>Address</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @restaurants.each do |restaurant| %>
-      <tr>
-        <td><%= restaurant.name %></td>
-        <td><%= restaurant.grade %></td>
-        <td><%= restaurant.zip_code %></td>
-        <td><%= restaurant.cuisine %></td>
-        <td><%= restaurant.phone %></td>
-        <td><%= restaurant.address %></td>
-        <td><%= link_to 'Show', restaurant %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <h2>These Should be Cool</h2>
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th class="col-xs-3">Name</th>
+            <th class="col-xs-1" style="text-align:center">Grade</th>
+            <th class="col-xs-1" style="text-align:center">Score</th>
+            <th class="col-xs-1">Cuisine</th>
+            <th class="col-xs-3">Neighborhood</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @best_five.each do |rest| %>
+          <tr>
+            <td><%= image_tag "my-icons-collection/goodicons/#{@goodicons.sample}" %> <%= link_to "#{rest.name.titleize}",rest%> </td>
+            <td style="text-align:center"><%= rest.grade %></td>
+            <td style="text-align:center"><%= rest.score %></td>
+            <td><%= rest.cuisine.titleize %></td>
+            <td><%= link_to "#{Neighborhood.find(rest.neighborhood_id).name.titleize}", neighborhood_path(rest.neighborhood_id) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-8">
+    <h3>Total Grade Distribution</h3>
+    <%= bar_chart @restaurants.group(:grade).count %>
+  </div>
+</div>

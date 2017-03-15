@@ -4,9 +4,12 @@ class RestaurantsController < ApplicationController
   # GET /restaurants
   # GET /restaurants.json
   def index
+    restaurant_phrases
     @restaurants = Restaurant.all
-    @best_five = Restaurant.best_five_health_score
-    @worst_five = Restaurant.worst_five_health_score
+    @best_five = Restaurant.all.order("score ASC").where.not(grade: nil).first(5)
+    @worst_five = Restaurant.all.order("score DESC").where.not(grade: nil).first(5)
+    @badicons = Dir.entries("app/assets/images/my-icons-collection/png").select {|f| !File.directory? f}
+    @goodicons = Dir.entries("app/assets/images/my-icons-collection/goodicons").select {|f| !File.directory? f}
   end
 
   # GET /restaurants/1
@@ -26,4 +29,9 @@ class RestaurantsController < ApplicationController
     def restaurant_params
       params.require(:restaurant).permit(:name, :grade, :zip)
     end
+
+    def restaurant_phrases
+      @phrases=["Sometimes it's Good to be Picky", "Doggy Bag not Included", "Fresh from the Oven", "Hot and Ready", "Saving Appetites One Restaurant at a Time"]
+    end
+
 end

@@ -6,7 +6,7 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
       <% if session[:account_id] %>
-        <li role="presentation"><a href="/accounts/<%= session[:account_id] %>">Home</a></li>
+        <li role="presentation"><a href="/accounts/<%= session[:account_id] %>">My Account</a></li>
         <li role="presentation"><%= link_to 'Logout', logout_path, :method => :delete%></a></li>
       <% else %>
         <li role="presentation"><a href="/login">Login</a></li>

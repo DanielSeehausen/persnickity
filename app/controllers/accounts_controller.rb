@@ -6,10 +6,15 @@ class AccountsController < ApplicationController
   end
 
   def show
+    #this is for the frontend, put where needed
+    # @a_avg = @account.neighborhood.get_relative_dominance_of_grade('A')
+    # @b_avg = @account.neighborhood.get_relative_dominance_of_grade('B')
+    # @c_avg = @account.neighborhood.get_relative_dominance_of_grade('C')
+    @best_five = Restaurant.all.order("score ASC").where.not(score: nil).first(5)
+    @worst_five = Restaurant.all.order("score DESC").where.not(score: nil).first(5)
     @neighborhood = Neighborhood.find_by(id: Restaurant.where(zip_code: @account.zip_code).first.neighborhood_id)
     get_relative_grades
     @logged_in_account = logged_in_account
-
     if logged_in_account
       if logged_in_account==set_account.id
         @logged_in_account = logged_in_account
