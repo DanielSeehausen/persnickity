@@ -11,7 +11,7 @@
  // * files in this directory. Styles in this file should be added after the last require_* statement.
  // * It is generally better to create a new file per style scope.
  // *
- // *= require_tree .
+ *= require_tree .
  // *= require_self
  /*
 
@@ -56,13 +56,41 @@
   background-color: #555
   border: none
   color: white
-  padding: 10px 25px
+  padding: 10px 20px
   text-align: center
   text-decoration: none
   display: inline-block
-  font-size: 16px
+  font-size: 13px
   margin: 4px 2px
   cursor: pointer
 
+.btn-group .button
+  background-color: #555
+  border: 1px solid black
+  color: white
+  padding: 10px 20px
+  text-align: center
+  text-decoration: none
+  display: inline-block
+  font-size: 13px
+  cursor: pointer
+  width: 150px
+  display: block
+
+
+.btn-group .button:not(:last-child)
+  border-bottom: none
+
 .button :hover
   color: #1abc9c !important
+
+.btn-group :hover
+  color: #1abc9c !important
+
+$hood_id : "1"
+
+.jumbotron
+  position: relative
+  height: 500px
+  overflow: hidden
+  padding: 0

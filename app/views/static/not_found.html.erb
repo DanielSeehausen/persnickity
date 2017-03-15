@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The page you were looking for doesn't exist (404)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%=  stylesheet_link_tag "not_found" %>
+</head>
+
+
+<!-- This file lives in public/404.html -->
+    <div id="wrapper" class="body" class="preload">
+        <div id="backdrop"></div>
+        <div class= "text" id="doesnt-look-wrapper"></div>
+        <div class= "text" id="like-wrapper"></div>
+        <div class= "text" id="anything-at-all-wrapper"></div>
+        <div class= "text" id="to-me-wrapper"></div>
+        <div class= "text" id="four-oh-four-wrapper"></div>
+    </div>
+</html>
+
+<script>
+//this first one fixed another minor way they could scroll
+function disableScrolling(){
+    var x=window.scrollX;
+    var y=window.scrollY;
+    window.onscroll=function(){window.scrollTo(x, y);};
+}
+disableScrolling();
+// left: 37, up: 38, right: 39, down: 40,
+// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+  e = e || window.event;
+  if (e.preventDefault)
+      e.preventDefault();
+  e.returnValue = false;
+}
+
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+function disableScroll() {
+  if (window.addEventListener) // older FF
+      window.addEventListener('DOMMouseScroll', preventDefault, false);
+  window.onwheel = preventDefault; // modern standard
+  window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+  window.ontouchmove  = preventDefault; // mobile
+  document.onkeydown  = preventDefaultForScrollKeys;
+}
+
+disableScroll()
+
+// window.onload = function() {
+//     document.getElementById("wrapper").removeAttribute("preload")
+//     console.log('d')
+// }
+
+</script>

@@ -1,26 +1,20 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
-  # GET /accounts
-  # GET /accounts.json
   def index
     @accounts = Account.all
   end
 
-  # GET /accounts/1
-  # GET /accounts/1.json
   def show
     #this is for the frontend, put where needed
     # @a_avg = @account.neighborhood.get_relative_dominance_of_grade('A')
     # @b_avg = @account.neighborhood.get_relative_dominance_of_grade('B')
     # @c_avg = @account.neighborhood.get_relative_dominance_of_grade('C')
-
     @best_five = Restaurant.all.order("score ASC").where.not(score: nil).first(5)
     @worst_five = Restaurant.all.order("score DESC").where.not(score: nil).first(5)
-  
+    @neighborhood = Neighborhood.find_by(id: Restaurant.where(zip_code: @account.zip_code).first.neighborhood_id)
+    get_relative_grades
     @logged_in_account = logged_in_account
-
-
     if logged_in_account
       if logged_in_account==set_account.id
         @logged_in_account = logged_in_account
@@ -36,7 +30,6 @@ class AccountsController < ApplicationController
     end
   end
 
-  # GET /accounts/new NOT ACCESSIBLE WHEN LOGGED IN
   def new
     if logged_in_account
       redirect_to login_path
@@ -45,15 +38,12 @@ class AccountsController < ApplicationController
     end
   end
 
-  # GET /accounts/1/edit CAN ONLY EDIT OWN ACCOUNT
   def edit
     if @account.id != logged_in_account
       redirect_to login_path
     end
   end
 
-  # POST /accounts
-  # POST /accounts.json
   def create
     if !Restaurant.find_by(zip_code: account_params["zip_code"])
       flash[:error] = "That's a dirty Zip yo"
@@ -73,8 +63,6 @@ class AccountsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /accounts/1
-  # PATCH/PUT /accounts/1.json
   def update
     respond_to do |format|
       if @account.update(account_params)
@@ -87,8 +75,6 @@ class AccountsController < ApplicationController
     end
   end
 
-  # DELETE /accounts/1 CAN ONLY DELETE OWN ACCOUNT
-  # DELETE /accounts/1.json
   def destroy
     if @account.id != logged_in_account
       redirect_to login_path
@@ -103,16 +89,10 @@ class AccountsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_account
-    if !Account.find_by(id: params[:id])
-      redirect_to homepage_path #TODO redirect to 404 when available
-    else
-      @account = Account.find_by(id: params[:id])
-    end
+    @account = Account.find_by(id: params[:id]) or not_found
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def account_params
     params.require(:account).permit(:user_name, :password, :email, :zip_code)
   end
