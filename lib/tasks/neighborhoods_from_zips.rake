@@ -54,7 +54,6 @@ namespace :update_db do
     #this could be made a lot quicker by using zip's as keys (as they are what is being looked up)
     counter = 0
     Restaurant.all.each do |r|
-      counter += 1
       neighborhood_zips.each do |n, zips|
         if zips.include?(r.zip_code)
           r.neighborhood_id = (Neighborhood.find_by name: n).id
@@ -62,6 +61,8 @@ namespace :update_db do
           next
         end
       end
+      counter += 1
+      print "\r #{counter}"
     end
 
   end
