@@ -2,17 +2,24 @@
 <div class="container-fluid text-center" style="padding-top:30px">
   <div class="row restaurant_content">
     <div class="col-sm-2 sidenav_placeholder">
+      <div class="btn-group">
+        <%= link_to 'My Account', account_path(session[:account_id]), class:"button" %>
+        <%= link_to 'All Restuarants', restaurants_path, class:"button" %>
+        <%= link_to 'Previous Restaurants', restaurant_path(@restaurant.id-1), class:"button" %>
+        <%= link_to 'Next Restaurants', restaurant_path(@restaurant.id+1), class:"button" %>
+        <%= link_to 'Neighborhoods', neighborhoods_path, class:"button" %>
+      </div>
     </div>
     <div class="col-sm-10 mainpage">
       <div class="row">
         <div class="col-sm-4">
           <div class="text-left" id = "Restaurant info">
             <h2> <%= @restaurant.name %> </h2>
-            <p><strong>Grade:</strong><%= @restaurant.grade %>
-            <p><strong>Score:</strong><%= @restaurant.score %>
-            <p><strong>Neighborhood:</strong><%= link_to @restaurant.neighborhood.name, neighborhood_path(@restaurant.neighborhood) %></p>
-            <p><strong>Cuisine:</strong><%= @restaurant.cuisine %></p>
-            <p><strong>Phone:</strong><%= @restaurant.phone %></p>
+            <p><strong>Grade:</strong> <%= @restaurant.grade %>
+            <p><strong>Score:</strong> <%= @restaurant.score %>
+            <p><strong>Neighborhood:</strong> <%= link_to @restaurant.neighborhood.name, neighborhood_path(@restaurant.neighborhood) %></p>
+            <p><strong>Cuisine:</strong> <%= @restaurant.cuisine %></p>
+            <p><strong>Phone:</strong> <%= @restaurant.phone %></p>
             <p> <strong>Address:</strong> <%= @restaurant.address %></p>
           </div>
         </div>
@@ -31,18 +38,21 @@
   <table class="table table-hover table-bordered">
     <thead>
       <tr>
-        <th class="col-xs-1">Inspection Date</th>
+        <th class="col-xs-2" style="text-align:center">Inspection Date</th>
         <th class="col-xs-1" style="text-align:center">Violation Code</th>
-        <th class="col-xs-3">Violation Description</th>
+        <th class="col-xs-9">Violation Description</th>
       </tr>
     </thead>
 
       <%@violations.each do |rv|%>
         <tbody>
-          <th><%=rv.inspection_date%></th>
-          <th><%=rv.violation.code%></th>
-          <th><%=rv.violation.description%></th>
+          <%if rv.violation.code%>
+            <th style="text-align:center"><%=rv.inspection_date%></th>
+            <th style="text-align:center"><%=rv.violation.code%></th>
+            <th><%=rv.violation.description%></th>
+          <%end%>
         </tbody>
+
       <%end%>
 
   </table>

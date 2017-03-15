@@ -17,7 +17,9 @@ class RestaurantsController < ApplicationController
 
   private
     def set_restaurant
-      @restaurant = Restaurant.find(params[:id]) or not_found
+      unless @restaurant = Restaurant.find_by(id: params[:id])
+        not_found
+      end
     end
 
     def restaurant_params
