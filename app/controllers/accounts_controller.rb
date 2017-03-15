@@ -20,7 +20,7 @@ class AccountsController < ApplicationController
 
     @logged_in_account = logged_in_account
 
-    
+
     if logged_in_account
       if logged_in_account==set_account.id
         @logged_in_account = logged_in_account
@@ -105,11 +105,7 @@ class AccountsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_account
-    if !Account.find_by(id: params[:id])
-      redirect_to homepage_path #TODO redirect to 404 when available
-    else
-      @account = Account.find_by(id: params[:id])
-    end
+    @account = Account.find_by(id: params[:id]) or not_found
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
