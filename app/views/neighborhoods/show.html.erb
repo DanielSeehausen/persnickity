@@ -9,8 +9,8 @@
       <div class="btn-group">
         <%= link_to 'My Account', account_path(session[:account_id]), class:"button" %>
         <%= link_to 'All Hoods', neighborhoods_path, class:"button" %>
-        <%= link_to 'Previous Hood', neighborhood_path(@neighborhood.id-1), class:"button" %>
-        <%= link_to 'Next Hood', neighborhood_path(@neighborhood.id+1), class:"button" %>
+        <%= link_to 'Previous Hood', neighborhood_path(@neighborhood.previous_id), class:"button" %>
+        <%= link_to 'Next Hood', neighborhood_path(@neighborhood.next_id), class:"button" %>
         <%= link_to 'Restuarants', restaurants_path, class:"button" %>
       </div>
     </div>
