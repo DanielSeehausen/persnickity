@@ -11,15 +11,24 @@ class NeighborhoodsController < ApplicationController
       @neighborhood = Neighborhood.find(params[:id])
       redirect_to "/neighborhoods/#{@neighborhood.slug}"
     else
-      @neighborhood.get_relative_grades
+      set_neighborhood
+      @rel_grades = @neighborhood.get_relative_grades
+      @worst_five = @neighborhood.get_bottom_five
+      @best_five = @neighborhood.get_top_five
+      @badicons = Dir.entries("app/assets/images/my-icons-collection/png").select {|f| !File.directory? f}
+      @goodicons = Dir.entries("app/assets/images/my-icons-collection/goodicons").select {|f| !File.directory? f}
     end
   end
 
 
   private
-  
+
   def set_neighborhood
-    @neighborhood = Neighborhood.find_by_slug(params[:id]) or not_found
+    if params[:id].to_i.to_s == params[:id]
+      @neighborhood = Neighborhood.find(params[:id]) or not_found
+    else
+      @neighborhood = Neighborhood.find_by_slug(params[:id]) or not_found
+    end
   end
 
   def neighborhood_params

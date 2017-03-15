@@ -9,20 +9,22 @@
       <div class="btn-group">
         <%= link_to 'Edit Account', edit_account_path(@account), class:"button" %>
         <%= link_to 'Delete Account', @account, method: :delete, data: { confirm: 'Are you sure?' }, class:"button" %>
-        <%= link_to 'Browse Neighborhoods', neighborhoods_path, class:"button" %>
+        <%= link_to 'Neighborhoods', neighborhoods_path, class:"button" %>
+        <%= link_to 'Restuarants', restaurants_path, class:"button" %>
       </div>
     </div>
 
-    <%= render 'shared/hood' %>
+    <div class="col-sm-8 text-left">
+      <p id="notice"><%= notice %></p>
+      <h2>Your Hood is <%= @neighborhood.name %></h2>
+      <h4>Worst Restaurants based on Most Recent Inspection</h4>
+      <%= render 'shared/table' %>
+    </div>
 
     <div class="col-sm-2 sidenav">
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
     </div>
 
   </div>
 </div>
+
+<%= render 'shared/relativesummary' %>

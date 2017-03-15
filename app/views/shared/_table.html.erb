@@ -1,0 +1,61 @@
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th class="col-xs-4">Name</th>
+      <th class="col-xs-1" style="text-align:center">Grade</th>
+      <th class="col-xs-1" style="text-align:center">Score</th>
+      <th class="col-xs-3">Cuisine</th>
+      <% if @neighborhood #coming from account or neighborhood show %>
+        <th class="col-xs-3">Address</th>
+      <% else #coming from restaurants index%>
+        <th class="col-xs-3">Neighborhood</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @worst_five.each do |rest| %>
+      <tr>
+        <td> <%= image_tag "my-icons-collection/png/#{@badicons.sample}" %>  <%= link_to "#{rest.name.titleize}",rest %> </td>
+        <td style="text-align:center"><%= rest.grade %></td>
+        <td style="text-align:center"><%= rest.score %></td>
+        <td><%= rest.cuisine.titleize %></td>
+        <% if @neighborhood #coming from account or neighborhood show %>
+          <td><%= rest.address.gsub(" Av","th Av").titleize %></td>
+        <% else #coming from restaurants index%>
+          <td><%= link_to "#{Neighborhood.find(rest.neighborhood_id).name.titleize}", neighborhood_path(rest.neighborhood_id)%></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<h4>And Now the Best Five...</h4>
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th class="col-xs-4">Name</th>
+      <th class="col-xs-1" style="text-align:center">Grade</th>
+      <th class="col-xs-1" style="text-align:center">Score</th>
+      <th class="col-xs-3">Cuisine</th>
+      <% if @neighborhood #coming from account or neighborhood show %>
+        <th class="col-xs-3">Address</th>
+      <% else #coming from restaurants index%>
+        <th class="col-xs-3">Neighborhood</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @best_five.each do |rest| %>
+      <tr>
+        <td> <%= image_tag "my-icons-collection/goodicons/#{@goodicons.sample}" %>  <%= link_to "#{rest.name.titleize}",rest %> </td>
+        <td style="text-align:center"><%= rest.grade %></td>
+        <td style="text-align:center"><%= rest.score %></td>
+        <td><%= rest.cuisine.titleize %></td>
+        <% if @neighborhood #coming from account or neighborhood show %>
+          <td><%= rest.address.gsub(" Av","th Av").titleize %></td>
+        <% else #coming from restaurants index%>
+          <td><%= link_to "#{Neighborhood.find(rest.neighborhood_id).name.titleize}", neighborhood_path(rest.neighborhood_id)%></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,29 @@
+<div class="container-fluid text-center" style="padding-top:10px">
+  <div class="row content">
+
+    <div class="col-sm-2 sidenav">
+    </div>
+
+    <div class="col-sm-8 text-left">
+      <div>
+        <h3><%= @neighborhood.name %> has... </h3>
+        <% @rel_grades.each do |hash| %>
+          <% hash.each do |letter, grade| %>
+            <% l = letter.to_s  %>
+            <% if grade == 0 %>
+              <p>No <%= l %>'s!</p>
+            <% elsif grade < 1 %>
+              <p><%= (100-grade*100).round(1) %>% less <%= l %>'s than the New York average</p>
+            <% else %>
+              <p><%= (grade*100-100).round(1) %>% more <%= l %>'s than the New York average</p>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-sm-2 sidenav">
+    </div>
+
+  </div>
+</div>
