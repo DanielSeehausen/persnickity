@@ -16,7 +16,7 @@ class NeighborhoodsController < ApplicationController
 
   private
     def set_neighborhood
-      @neighborhood = Neighborhood.find(params[:id])
+      @neighborhood = Neighborhood.find_by_slug(params[:id])
     end
 
     def neighborhood_params
