@@ -23,10 +23,8 @@
             <p> <strong>Address:</strong> <%= @restaurant.address %></p>
           </div>
         </div>
-        <div class="col-sm-3">
-            <%=line_chart @restaurant.restaurant_violations.group(:inspection_date).count%>
-        </div>
-        <div class="col-sm-3">
+        <div class="col-sm-6">
+            <p><strong>violations Timeline</strong></p>
             <%=line_chart @restaurant.restaurant_violations.group(:inspection_date).count%>
         </div>
       </div>
@@ -34,7 +32,11 @@
   </div>
 
   <br>
-
+  <p style="text-align:left">  <%= image_tag "my-icons-collection/png/#{@badicons[0]}" %>
+      <strong>For Critical Violation</strong>
+      <%= image_tag "my-icons-collection/goodicons/#{@goodicons[17]}" %>
+      <strong>For Non-Critical Violation</strong>
+</p>
   <table class="table table-hover table-bordered">
     <thead>
       <tr>
@@ -47,12 +49,17 @@
       <%@violations.each do |rv|%>
         <tbody>
           <%if rv.violation.code%>
-            <th style="text-align:center"><%=rv.inspection_date%></th>
-            <th style="text-align:center"><%=rv.violation.code%></th>
-            <th><%=rv.violation.description%></th>
+            <td style="text-align:center">
+              <%if rv.violation.critical_flag%>
+                <%= image_tag "my-icons-collection/png/#{@badicons[0]}" %>
+              <%else%>
+                <%= image_tag "my-icons-collection/goodicons/#{@goodicons[17]}" %>
+              <%end%>
+            <%=rv.inspection_date%></th>
+            <td style="text-align:center"><%=rv.violation.code%></th>
+            <td style="text-align:left"><%=rv.violation.description%></th>
           <%end%>
         </tbody>
-
       <%end%>
 
   </table>

@@ -5,8 +5,6 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.all
     @best_five = Restaurant.all.order("score ASC").where.not(grade: nil).first(5)
     @worst_five = Restaurant.all.order("score DESC").where.not(grade: nil).first(5)
-    @badicons = Dir.entries("app/assets/images/my-icons-collection/png").select {|f| !File.directory? f}
-    @goodicons = Dir.entries("app/assets/images/my-icons-collection/goodicons").select {|f| !File.directory? f}
   end
 
   def show
@@ -20,6 +18,8 @@ class RestaurantsController < ApplicationController
       unless @restaurant = Restaurant.find_by(id: params[:id])
         not_found
       end
+      @badicons = Dir.entries("app/assets/images/my-icons-collection/png").select {|f| !File.directory? f}
+      @goodicons = Dir.entries("app/assets/images/my-icons-collection/goodicons").select {|f| !File.directory? f}
     end
 
     def restaurant_params
