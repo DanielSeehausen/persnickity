@@ -14,6 +14,10 @@ class NeighborhoodsController < ApplicationController
       else
         set_neighborhood
         get_relative_grades
+        @worst_five = @neighborhood.get_bottom_five
+        @best_five = @neighborhood.get_top_five
+        @badicons = Dir.entries("app/assets/images/my-icons-collection/png").select {|f| !File.directory? f}
+        @goodicons = Dir.entries("app/assets/images/my-icons-collection/goodicons").select {|f| !File.directory? f}
       end
     end
   end

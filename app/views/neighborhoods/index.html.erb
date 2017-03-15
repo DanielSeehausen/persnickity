@@ -1,9 +1,17 @@
+<%= render 'shared/carousel' %>
+
 <div class="container-fluid text-center" style="padding-top:30px">
   <div class="row content">
     <h1>All Neighborhoods</h1>
-    <div class="col-sm-3 sidenav">
+    <div class="col-xs-2 sidenav">
+      <h2>Neighborhood Browser</h2>
+      <br>
+      <div class="btn-group">
+        <%= link_to 'My Account', account_path(session[:account_id]), class:"button" %>
+        <%= link_to 'Restuarants', restaurants_path, class:"button" %>
+      </div>
     </div>
-    <div class="col-sm-6 text-left">
+    <div class="col-xs-8 text-left">
       <table class="table table-hover table-bordered table-condensed">
         <thead>
           <tr>
@@ -23,7 +31,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-sm-3 sidenav">
+    <div class="col-xs-2 sidenav">
     </div>
   </div>
 </div>
