@@ -1,6 +1,6 @@
 <div class="col-sm-8 text-left">
   <p id="notice"><%= notice %></p>
-  <h2>Your Hood is <%= @hood.name %></h2>
+  <h2>Your Hood is <%= @neighborhood.name %></h2>
   <h4>Worst Restaurants based on Most Recent Inspection</h4>
   <table class="table table-hover table-bordered">
     <thead>
@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @hood.get_bottom_five.each do |rest| %>
+      <% @neighborhood.get_bottom_five.each do |rest| %>
         <tr>
           <td><%= rest[:name].titleize %></td>
           <td style="text-align:center"><%= rest[:grade] %></td>
@@ -27,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @hood.get_top_five.each do |rest| %>
+      <% @neighborhood.get_top_five.each do |rest| %>
         <tr>
           <td class="col-xs-4"><%= rest[:name].titleize %></td>
           <td class="col-xs-2" style="text-align:center"><%= rest[:grade] %></td>
@@ -37,7 +37,7 @@
     </tbody>
   </table>
   <hr>
-  <h3><%= @hood.name %> has... </h3>
+  <h3><%= @neighborhood.name %> has... </h3>
   <% @rel_grades.each do |hash| %>
     <% hash.each do |letter, grade| %>
       <% l = letter.to_s  %>

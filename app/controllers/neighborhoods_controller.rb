@@ -6,11 +6,15 @@ class NeighborhoodsController < ApplicationController
 
   def show
     if params[:id] == '0'
-      redirect_to '/neighborhoods/1'
+      redirect_to '/neighborhoods/park-slope' #TODO redirect to 404
     else
-      set_neighborhood
-      @hood = @neighborhood
-      get_relative_grades
+      if is_number?(params[:id])
+        @neighborhood = Neighborhood.find(params[:id])
+        redirect_to "/neighborhoods/#{@neighborhood.slug}"
+      else
+        set_neighborhood
+        get_relative_grades
+      end
     end
   end
 
@@ -22,4 +26,9 @@ class NeighborhoodsController < ApplicationController
     def neighborhood_params
       params.require(:neighborhood).permit(:name, :dominant_cuisine)
     end
+
+    def is_number? string
+      true if Float(string) rescue false
+    end
+
 end

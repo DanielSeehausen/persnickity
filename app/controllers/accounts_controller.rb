@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
   end
 
   def show
-    @hood = Neighborhood.find_by(id: Restaurant.where(zip_code: @account.zip_code).first.neighborhood_id)
+    @neighborhood = Neighborhood.find_by(id: Restaurant.where(zip_code: @account.zip_code).first.neighborhood_id)
     get_relative_grades
     @logged_in_account = logged_in_account
 
