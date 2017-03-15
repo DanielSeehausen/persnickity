@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
+  before_action :set_restaurant, only: [:show]
+  before_action :set_icons, only: [:index, :show]
 
   def index
     @restaurants = Restaurant.all
@@ -18,6 +19,9 @@ class RestaurantsController < ApplicationController
       unless @restaurant = Restaurant.find_by(id: params[:id])
         not_found
       end
+    end
+
+    def set_icons
       @badicons = Dir.entries("app/assets/images/my-icons-collection/png").select {|f| !File.directory? f}
       @goodicons = Dir.entries("app/assets/images/my-icons-collection/goodicons").select {|f| !File.directory? f}
     end

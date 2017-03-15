@@ -23,9 +23,13 @@
             <p> <strong>Address:</strong> <%= @restaurant.address %></p>
           </div>
         </div>
-        <div class="col-sm-6">
-            <p><strong>violations Timeline</strong></p>
+        <div class="col-sm-3">
+            <p><strong>Violations Timeline</strong></p>
             <%=line_chart @restaurant.restaurant_violations.group(:inspection_date).count%>
+        </div>
+        <div class="col-sm-3">
+            <p><strong>Score Timeline</strong></p>
+            <%=line_chart @restaurant.get_scores_over_time%>
         </div>
       </div>
     </div>
