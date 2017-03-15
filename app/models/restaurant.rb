@@ -10,18 +10,15 @@ class Restaurant < ApplicationRecord
   # def assign_neighborhood_id_from_zip
   #
   # end
-  def get_scores_over_time
-
+  def data_for_score_line_chart
    prev_date = nil #need dis
-   score_time = []
+   time_score = []
    self.restaurant_violations.order('inspection_date ASC').each do |v|
-     next if (v.inspection_date == prev_date)
+     next if (v.inspection_date == prev_date || v.score.nil?)
      prev_date = v.inspection_date
-     if v.score
-       score_time << [v.inspection_date,v.score]
-     end
+     time_score << [v.inspection_date,v.score]
    end
-   score_time
+   time_score
  end
 
   def self.ACTIVE_GRADES

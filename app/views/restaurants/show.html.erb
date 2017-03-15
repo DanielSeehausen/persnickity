@@ -29,7 +29,7 @@
         </div>
         <div class="col-sm-3">
             <p><strong>Score Timeline</strong></p>
-            <%=line_chart @restaurant.get_scores_over_time%>
+            <%=line_chart @restaurant.data_for_score_line_chart%>
         </div>
       </div>
     </div>
