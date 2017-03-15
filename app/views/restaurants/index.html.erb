@@ -27,7 +27,7 @@
           <tr>
             <th class="col-xs-3">Name</th>
             <th class="col-xs-1" style="text-align:center">Grade</th>
-            <th class="col-xs-1" style="text-align:center">Violations</th>
+            <th class="col-xs-1" style="text-align:center">Score</th>
             <th class="col-xs-1">Cuisine</th>
             <th class="col-xs-3">Neighborhood</th>
           </tr>
@@ -37,9 +37,9 @@
             <tr>
               <td> <%= image_tag "my-icons-collection/png/#{@badicons.sample}" %>  <%= link_to "#{rest.name.titleize}",rest %> </td>
               <td style="text-align:center"><%= rest.grade %></td>
-              <td style="text-align:center"><%= rest.violations.count %></td>
+              <td style="text-align:center"><%= rest.score %></td>
               <td><%= rest.cuisine.titleize %></td>
-              <td><%= Neighborhood.find(rest.neighborhood_id).name.titleize %></td>
+              <td><%= link_to "#{Neighborhood.find(rest.neighborhood_id).name.titleize}", neighborhood_path(rest.neighborhood_id)%></td>
             </tr>
           <% end %>
         </tbody>
@@ -51,7 +51,7 @@
           <tr>
             <th class="col-xs-3">Name</th>
             <th class="col-xs-1" style="text-align:center">Grade</th>
-            <th class="col-xs-1" style="text-align:center">Violations</th>
+            <th class="col-xs-1" style="text-align:center">Score</th>
             <th class="col-xs-1">Cuisine</th>
             <th class="col-xs-3">Neighborhood</th>
           </tr>
@@ -61,13 +61,19 @@
           <tr>
             <td><%= image_tag "my-icons-collection/goodicons/#{@goodicons.sample}" %> <%= link_to "#{rest.name.titleize}",rest%> </td>
             <td style="text-align:center"><%= rest.grade %></td>
-            <td style="text-align:center"><%= rest.violations.count %></td>
+            <td style="text-align:center"><%= rest.score %></td>
             <td><%= rest.cuisine.titleize %></td>
-            <td><%= Neighborhood.find(rest.neighborhood_id).name.titleize %></td>
+            <td><%= link_to "#{Neighborhood.find(rest.neighborhood_id).name.titleize}", neighborhood_path(rest.neighborhood_id) %></td>
           </tr>
           <% end %>
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-8">
+    <h3>Total Grade Distribution</h3>
+    <%= bar_chart @restaurants.group(:grade).count %>
   </div>
 </div>
