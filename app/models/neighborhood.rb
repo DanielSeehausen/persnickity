@@ -84,20 +84,23 @@ class Neighborhood < ApplicationRecord
   end
   ##################################################################################################
 
+  ##################################################################################################
   def get_bottom_five
     #returns bottom 5 PERFORMING (highest scores) restaurants
-    self.restaurants.all.order("score DESC").first(5)
+    self.restaurants.all.where("score > -1").order("score DESC").first(5)
   end
 
   def get_top_five
     #returns top 5 PERFORMING (lowest scores) restaurants
-    self.restaurants.all.order("score ASC").first(5)
+    self.restaurants.all.where("score > -1").order("score ASC").first(5)
   end
 
   def self.get_worst_all_NYC
     Restaurant.all.order("score DESC").where.not(score: nil).first
   end
+  ##################################################################################################
 
+  ##################################################################################################
   def self.find_by_slug(slug)
     Neighborhood.all.find do |hood|
       hood.slug == slug
@@ -111,7 +114,9 @@ class Neighborhood < ApplicationRecord
   def to_param
     slug
   end
+  ##################################################################################################
 
+  ##################################################################################################
   def neighborhood_violations
     violation_array = []
     self.restaurants.each do |r|
@@ -121,4 +126,53 @@ class Neighborhood < ApplicationRecord
     end
     violation_array
   end
+  ##################################################################################################
+
+  ##################################################################################################
+  def unpack_avg_scores_and_years
+    years = self.years_for_avgs.split("-")
+    scores = self.avg_yearly_scores.split("-")
+    return { :years => years, :scores => scores }
+  end
+
+  def get_avg_scores_per_year
+    #THIS SHOULD NOT BE CALLED WHEN SERVING CLIENTS!
+    #Takes a little bit to complete. Columns via migrations were added to neighborhoods and an
+    #appropriate rake task was created to store neighborhoods avg_scores and years within.
+    #they are stored as string types and are unpackable via the function above (which is what should
+    #be called if you are fetching for client)
+    scores = []
+    years = []
+
+    restaurants = self.restaurants
+    year = 9999
+
+    restaurants.each do |r|
+      restaurant_earliest_year = r.restaurant_violations.order('inspection_date').first.inspection_date.year
+      if restaurant_earliest_year < year
+        year = restaurant_earliest_year
+      end
+    end
+
+    year -= 1 #so we can iterate safely if count is 0 (this is shoddy solution but its late and im tired and it works)
+    while year < 2017 do
+      year += 1
+      yearly_score_total = 0
+      count = 0
+      restaurants.each do |r|
+        avg_year_score = r.get_avg_score_within_year(year)
+        if avg_year_score != nil
+          yearly_score_total += avg_year_score
+          count += 1
+        end
+      end
+      next if count == 0 #this little dingleberry throws crap off with the year. 
+      years << year
+      scores << (yearly_score_total/count)
+    end
+    return {:scores => scores, :years => years}
+  end
+  ##################################################################################################
+
+
 end
