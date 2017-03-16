@@ -15,4 +15,8 @@ class Restaurant < ApplicationRecord
     ['A', 'B', 'C']
   end
 
+  def self.search(search)
+    where("name ILIKE ? OR cuisine ILIKE ?", "%#{search}%", "%#{search}%")
+  end
+
 end

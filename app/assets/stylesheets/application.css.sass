@@ -11,7 +11,7 @@
  // * files in this directory. Styles in this file should be added after the last require_* statement.
  // * It is generally better to create a new file per style scope.
  // *
- *= require_tree .
+ // *= require_tree .
  // *= require_self
  /*
 
@@ -39,6 +39,12 @@
 .navbar-default .navbar-nav li a
   color: white
 
+.nav .navbar-nav .navbar-right
+  width: 450px
+  position: absolute
+  margin: 0
+  left: 50%
+
 .navbar a:hover
   color: #1abc9c !important
 
@@ -47,7 +53,7 @@
   color: white
   padding-bottom: 10px
   padding-top: 10px
-  margin-top: 180px
+  margin-top: 100px
 
 .footer a:hover
   color: #1abc9c !important
@@ -88,6 +94,45 @@
 
 .jumbotron
   position: relative
-  height: 500px
+  max-height: 350px
   overflow: hidden
   padding: 0
+  display: inline-block
+  width: 100%
+
+.jumbotron .img-responsive
+  margin-top: -25%
+  width: 100%
+
+.search-wrapper
+  background-color: #555
+  padding-bottom: 10px
+  padding-top: 10px
+  width: 250px
+
+.search-wrapper :hover
+  color: #1abc9c !important
+
+.search-field
+  padding-top: 5px
+  padding-left: 6px
+  margin-top: 3px
+  border: none
+  font-size: 13px
+  font-style: italic
+  color: #999
+  width: 165px
+
+.search-submit-button
+  background-color: #555
+  border: none
+  font-size: 18px
+  color: white
+  right: 10px
+  position: absolute
+
+.search-submit-button :hover
+  color: #1abc9c !important
+
+.row
+  padding: 20px

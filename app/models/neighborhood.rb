@@ -105,7 +105,7 @@ class Neighborhood < ApplicationRecord
   end
 
   def slug
-    self.name.gsub(" ","-").downcase
+    self.name.gsub(/\W/, '-').downcase
   end
 
   def to_param

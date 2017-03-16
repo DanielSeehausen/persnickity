@@ -13,6 +13,37 @@
 
 
     <div class="col-sm-8 text-left">
+
+      <% if @found_rests %>
+        <% if @found_rests.empty? %>
+          <h3>We couldn't find any restaurants with that name</h3>
+        <% else %>
+          <h3>We found the following matching restaurants</h3>
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th class="col-xs-4">Name</th>
+                <th class="col-xs-1" style="text-align:center">Grade</th>
+                <th class="col-xs-1" style="text-align:center">Score</th>
+                <th class="col-xs-3">Cuisine</th>
+                <th class="col-xs-3">Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @found_rests.each do |rest| %>
+                <tr>
+                  <td><%= link_to "#{rest.name.titleize}",rest %></td>
+                  <td style="text-align:center"><%= rest.grade %></td>
+                  <td style="text-align:center"><%= rest.score %></td>
+                  <td><%= rest.cuisine.titleize %></td>
+                  <td><%= rest.address.gsub(" Av","th Av").titleize %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      <% end %>
+
       <h2>NYC's Worst Offenders</h2>
       <%= render 'shared/table' %>
       <br>

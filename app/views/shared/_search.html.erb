@@ -1,0 +1,6 @@
+<div class="search-wrapper">
+  <%= form_tag(restaurants_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search by name or cuisine", class:"search-field" %>
+    <%= submit_tag "Search", :name => nil, class:".btn-group .button", class:"search-submit-button"%>
+  <% end %>
+</div>
