@@ -6,7 +6,9 @@
     <div class="col-sm-2 sidenav">
       <h2>Pick Your Poison</h2>
       <div class="btn-group">
-        <%= link_to 'My Account', account_path(session[:account_id]), class:"button" %>
+        <% if session[:account_id] %>
+          <%= link_to 'My Account', account_path(session[:account_id]), class:"button" %>
+        <% end %>
         <%= link_to 'Neighborhoods', neighborhoods_path, class:"button" %>
       </div>
     </div>

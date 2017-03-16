@@ -124,7 +124,7 @@ class Neighborhood < ApplicationRecord
   def previous_id
     return Neighborhood.all.count if self.id == 1
     self.id - 1
-    
+  end
   ##################################################################################################
   def neighborhood_violations
     violation_array = []
@@ -175,7 +175,7 @@ class Neighborhood < ApplicationRecord
           count += 1
         end
       end
-      next if count == 0 #this little dingleberry throws crap off with the year. 
+      next if count == 0 #this little dingleberry throws crap off with the year.
       years << year
       scores << (yearly_score_total/count)
     end
