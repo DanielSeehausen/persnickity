@@ -62,5 +62,5 @@ class Restaurant < ApplicationRecord
   def self.search(search)
     where("name ILIKE ? OR cuisine ILIKE ?", "%#{search}%", "%#{search}%")
   end
-  
+
 end

@@ -124,7 +124,7 @@ class Neighborhood < ApplicationRecord
   def previous_id
     return Neighborhood.all.count if self.id == 1
     self.id - 1
-    
+  end
   ##################################################################################################
   def neighborhood_violations
     violation_array = []
@@ -150,9 +150,6 @@ class Neighborhood < ApplicationRecord
     #appropriate rake task was created to store neighborhoods avg_scores and years within.
     #they are stored as string types and are unpackable via the function above (which is what should
     #be called if you are fetching for client)
-    scores = []
-    years = []
-
     restaurants = self.restaurants
     year = 9999
 
@@ -162,10 +159,13 @@ class Neighborhood < ApplicationRecord
         year = restaurant_earliest_year
       end
     end
+    if year == 9999
+      raise ArgumentError, "Restaurant data incomplete! No earliest year found!", caller
+    end
 
-    year -= 1 #so we can iterate safely if count is 0 (this is shoddy solution but its late and im tired and it works)
-    while year < 2017 do
-      year += 1
+    scores = []
+    years = []
+    while year < (Time.new.year + 1) do
       yearly_score_total = 0
       count = 0
       restaurants.each do |r|
@@ -175,7 +175,8 @@ class Neighborhood < ApplicationRecord
           count += 1
         end
       end
-      next if count == 0 #this little dingleberry throws crap off with the year. 
+      year += 1
+      next if count == 0
       years << year
       scores << (yearly_score_total/count)
     end
