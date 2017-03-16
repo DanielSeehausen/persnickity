@@ -36,6 +36,7 @@ class Restaurant < ApplicationRecord
     end
     return nil if count == 0
     return total/count
+  end
 
   def self.search(search)
     where("name ILIKE ? OR cuisine ILIKE ?", "%#{search}%", "%#{search}%")
