@@ -1,6 +1,7 @@
 class StaticController < ApplicationController
 
   def new
+    @pie_chart = {'A'=>Restaurant.where(grade: "A").count, 'B'=>Restaurant.where(grade: "B").count, 'C and Other'=>Restaurant.where(grade: "C").count}
   end
 
   def about

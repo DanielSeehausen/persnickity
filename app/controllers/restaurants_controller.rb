@@ -1,6 +1,8 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
 
+
+
   def index
     if params[:search]
       @found_rests = Restaurant.search(params[:search])
