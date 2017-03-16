@@ -2,6 +2,9 @@ class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
 
   def index
+    if params[:search]
+      @found_rests = Restaurant.search(params[:search])
+    end
     @restaurants = Restaurant.all
     @best_five = Restaurant.all.order("score ASC").where.not(grade: nil).first(5)
     @worst_five = Restaurant.all.order("score DESC").where.not(grade: nil).first(5)
