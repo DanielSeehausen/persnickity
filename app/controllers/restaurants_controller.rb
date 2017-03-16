@@ -1,6 +1,8 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
 
+
+
   def index
     @restaurants = Restaurant.all
     @best_five = Restaurant.all.order("score ASC").where.not(grade: nil).first(5)
