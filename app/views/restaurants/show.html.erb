@@ -2,46 +2,67 @@
 <div class="container-fluid text-center" style="padding-top:30px">
   <div class="row restaurant_content">
     <div class="col-sm-2 sidenav_placeholder">
+      <div class="btn-group">
+        <%= link_to 'My Account', account_path(session[:account_id]), class:"button" %>
+        <%= link_to 'All Restuarants', restaurants_path, class:"button" %>
+        <%= link_to 'Previous Restaurants', restaurant_path(@restaurant.previous_id), class:"button"%>
+        <%= link_to 'Next Restaurants', restaurant_path(@restaurant.next_id), class:"button" %>
+        <%= link_to 'Neighborhoods', neighborhoods_path, class:"button" %>
+      </div>
     </div>
     <div class="col-sm-10 mainpage">
       <div class="row">
         <div class="col-sm-4">
           <div class="text-left" id = "Restaurant info">
             <h2> <%= @restaurant.name %> </h2>
-            <p><strong>Grade:</strong><%= @restaurant.grade %>
-            <p><strong>Score:</strong><%= @restaurant.score %>
-            <p><strong>Neighborhood:</strong><%= link_to @restaurant.neighborhood.name, neighborhood_path(@restaurant.neighborhood) %></p>
-            <p><strong>Cuisine:</strong><%= @restaurant.cuisine %></p>
-            <p><strong>Phone:</strong><%= @restaurant.phone %></p>
+            <p><strong>Grade:</strong> <%= @restaurant.grade %>
+            <p><strong>Score:</strong> <%= @restaurant.score %>
+            <p><strong>Neighborhood:</strong> <%= link_to @restaurant.neighborhood.name, neighborhood_path(@restaurant.neighborhood) %></p>
+            <p><strong>Cuisine:</strong> <%= @restaurant.cuisine %></p>
+            <p><strong>Phone:</strong> <%= @restaurant.phone %></p>
             <p> <strong>Address:</strong> <%= @restaurant.address %></p>
           </div>
         </div>
         <div class="col-sm-3">
+            <p><strong>Violations Timeline</strong></p>
             <%=line_chart @restaurant.restaurant_violations.group(:inspection_date).count%>
         </div>
         <div class="col-sm-3">
-            <%=line_chart @restaurant.restaurant_violations.group(:inspection_date).count%>
+            <p><strong>Score Timeline</strong></p>
+            <%=line_chart @restaurant.data_for_score_line_chart%>
         </div>
       </div>
     </div>
   </div>
 
   <br>
-
+  <p><%= image_tag "my-icons-collection/png/#{@badicons[0]}" %>
+      <strong>For Critical Violation</strong>
+      <%= image_tag "my-icons-collection/goodicons/#{@goodicons[17]}" %>
+      <strong>For Non-Critical Violation</strong>
+</p>
   <table class="table table-hover table-bordered">
     <thead>
       <tr>
-        <th class="col-xs-1">Inspection Date</th>
+        <th class="col-xs-2" style="text-align:center">Inspection Date</th>
         <th class="col-xs-1" style="text-align:center">Violation Code</th>
-        <th class="col-xs-3">Violation Description</th>
+        <th class="col-xs-9">Violation Description</th>
       </tr>
     </thead>
 
       <%@violations.each do |rv|%>
         <tbody>
-          <th><%=rv.inspection_date%></th>
-          <th><%=rv.violation.code%></th>
-          <th><%=rv.violation.description%></th>
+          <%if rv.violation.code%>
+            <td style="text-align:center">
+              <%if rv.violation.critical_flag%>
+                <%= image_tag "my-icons-collection/png/#{@badicons[0]}" %>
+              <%else%>
+                <%= image_tag "my-icons-collection/goodicons/#{@goodicons[17]}" %>
+              <%end%>
+            <%=rv.inspection_date%></th>
+            <td style="text-align:center"><%=rv.violation.code%></th>
+            <td style="text-align:left"><%=rv.violation.description%></th>
+          <%end%>
         </tbody>
       <%end%>
 

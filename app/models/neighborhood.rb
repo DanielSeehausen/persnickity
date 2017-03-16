@@ -116,6 +116,15 @@ class Neighborhood < ApplicationRecord
   end
   ##################################################################################################
 
+  def next_id
+    return 1 if self.id == Neighborhood.all.count
+    self.id + 1
+  end
+
+  def previous_id
+    return Neighborhood.all.count if self.id == 1
+    self.id - 1
+    
   ##################################################################################################
   def neighborhood_violations
     violation_array = []
