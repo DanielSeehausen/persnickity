@@ -138,6 +138,17 @@ class Neighborhood < ApplicationRecord
   ##################################################################################################
 
   ##################################################################################################
+  def get_avg_scores_and_years_for_chartkick
+    h = self.unpack_avg_scores_and_years
+    x_y_pairs = []
+    i = 0
+    h[:years].each do
+      x_y_pairs << [h[:years][i], h[:scores][i]]
+      i += 1
+    end
+    return x_y_pairs
+  end
+
   def unpack_avg_scores_and_years
     years = self.years_for_avgs.split("-")
     scores = self.avg_yearly_scores.split("-")
@@ -183,6 +194,5 @@ class Neighborhood < ApplicationRecord
     return {:scores => scores, :years => years}
   end
   ##################################################################################################
-
 
 end

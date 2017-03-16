@@ -3,10 +3,12 @@
   <div class="row restaurant_content">
     <div class="col-sm-2 sidenav_placeholder">
       <div class="btn-group">
-        <%= link_to 'My Account', account_path(session[:account_id]), class:"button" %>
+        <% if session[:account_id] %>
+          <%= link_to 'My Account', account_path(session[:account_id]), class:"button" %>
+        <% end %>
         <%= link_to 'All Restuarants', restaurants_path, class:"button" %>
-        <%= link_to 'Previous Restaurants', restaurant_path(@restaurant.previous_id), class:"button"%>
-        <%= link_to 'Next Restaurants', restaurant_path(@restaurant.next_id), class:"button" %>
+        <%= link_to 'Prev. Restaurant', restaurant_path(@restaurant.previous_id), class:"button"%>
+        <%= link_to 'Next Restaurant', restaurant_path(@restaurant.next_id), class:"button" %>
         <%= link_to 'Neighborhoods', neighborhoods_path, class:"button" %>
       </div>
     </div>

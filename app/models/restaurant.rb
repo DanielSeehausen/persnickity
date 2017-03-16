@@ -29,6 +29,18 @@ class Restaurant < ApplicationRecord
     self.id - 1
   end
 
+  def get_scores_over_time_for_chartkick
+    h = self.get_scores_over_time
+    binding.pry
+    x_y_pairs = []
+    i = 0
+    h[:score].each do
+      x_y_pairs << [h[:date][i], h[:score][i]]
+      i += 1
+    end
+    return x_y_pairs
+  end
+
   def get_scores_over_time
     dates = []
     scores = []
@@ -40,7 +52,7 @@ class Restaurant < ApplicationRecord
       dates << v.inspection_date
       scores << v.score
     end
-    return { :score => score, :date => date }
+    return { :score => scores, :date => dates }
   end
 
   def get_avg_score_within_year(year)

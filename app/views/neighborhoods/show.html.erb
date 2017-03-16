@@ -7,16 +7,14 @@
       <h2>Neighborhood Browser</h2>
       <br>
       <div class="btn-group">
-        <%= link_to 'My Account', account_path(session[:account_id]), class:"button" %>
+        <% if session[:account_id] %>
+          <%= link_to 'My Account', account_path(session[:account_id]), class:"button" %>
+        <% end %>
         <%= link_to 'All Hoods', neighborhoods_path, class:"button" %>
 
         <%= link_to 'Previous Hood', neighborhood_path(@neighborhood.previous_id), class:"button" %>
         <%= link_to 'Next Hood', neighborhood_path(@neighborhood.next_id), class:"button" %>
         <%= link_to 'Restuarants', restaurants_path, class:"button" %>
-
-        <%= link_to 'Previous Hood', neighborhood_path(@neighborhood.id-1), class:"button" %>
-        <%= link_to 'Next Hood', neighborhood_path(@neighborhood.id+1), class:"button" %>
-        <%= link_to 'Restaurants', restaurants_path, class:"button" %>
 
       </div>
     </div>
