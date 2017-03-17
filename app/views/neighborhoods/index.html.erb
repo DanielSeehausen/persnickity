@@ -19,7 +19,7 @@
           <tr>
             <th class="col-xs-1" style="text-align:center">No.</th>
             <th class="col-xs-4">Name</th>
-            <th class="col-xs-2">Dummy</th>
+            <th class="col-xs-2">Average Score</th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
           <tr>
             <td style="text-align:center"><%= link_to neighborhood.id, neighborhood %></td>
             <td><%= link_to neighborhood.name, neighborhood %></td>
-            <td> dummy </td>
+            <td><%= neighborhood.get_average_score.round(2)  %></td>
           </tr>
           <% end %>
         </tbody>
