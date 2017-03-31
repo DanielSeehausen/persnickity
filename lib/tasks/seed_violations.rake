@@ -29,7 +29,7 @@ namespace :update_db do
     require 'open-uri'
     require 'json'
 
-    url = open("https://data.cityofnewyork.us/resource/xx67-kt59.json?$limit=48800").read #running this task in heroku breaks at 48870
+    url = open("https://data.cityofnewyork.us/resource/xx67-kt59.json?$limit=30000").read #running this task in heroku breaks at 48870
 
     results = JSON.parse(url)
     counter = 0
