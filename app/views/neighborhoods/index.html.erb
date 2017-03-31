@@ -27,7 +27,11 @@
           <tr>
             <td style="text-align:center"><%= link_to neighborhood.id, neighborhood %></td>
             <td><%= link_to neighborhood.name, neighborhood %></td>
-            <td><%= neighborhood.get_average_score.round(2)  %></td>
+            <td><% if !neighborhood.get_average_score%>
+                <%= "No Scores" %>
+                <% else %>
+                <%= neighborhood.get_average_score.round(2)  %></td>
+                <%end%>
           </tr>
           <% end %>
         </tbody>
