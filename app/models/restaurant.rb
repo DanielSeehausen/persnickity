@@ -31,7 +31,6 @@ class Restaurant < ApplicationRecord
 
   def get_scores_over_time_for_chartkick
     h = self.get_scores_over_time
-    binding.pry
     x_y_pairs = []
     i = 0
     h[:score].each do
