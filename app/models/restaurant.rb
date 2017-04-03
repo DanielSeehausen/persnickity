@@ -1,7 +1,7 @@
 class Restaurant < ApplicationRecord
   has_many :restaurant_violations
   has_many :violations, through: :restaurant_violations
-  belongs_to :neighborhood
+  belongs_to :neighborhood, optional: true
   validates :zip_code, presence: true
 
   def data_for_score_line_chart
